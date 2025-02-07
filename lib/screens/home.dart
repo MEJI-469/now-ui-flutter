@@ -13,17 +13,15 @@ import 'package:now_ui_flutter/widgets/drawer.dart';
 
 final Map<String, Map<String, String>> homeCards = {
   "Ice Cream": {
-    "title": "Society has put up so many boundaries",
-    "image":
-        "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+    "title": "Traducir de señas a texto mediante la camara.",
+    "image": "assets/imgs/singtotext.png"
   },
   "Makeup": {
-    "title": "Is makeup one of your daily esse …",
-    "image":
-        "https://images.unsplash.com/photo-1519368358672-25b03afee3bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2004&q=80"
+    "title": "Traducir de texto a señas.",
+    "image": "assets/imgs/texttosing.png"
   },
   "Coffee": {
-    "title": "Many limitations on what’s right",
+    "title": "Historial de las traducciones.",
     "image":
         "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/now-ui-pro-react-native/bg40.jpg"
   },
@@ -33,9 +31,8 @@ final Map<String, Map<String, String>> homeCards = {
         "https://images.unsplash.com/photo-1536686763189-829249e085ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=705&q=80"
   },
   "Argon": {
-    "title": "Pink is obviously a better color",
-    "image":
-        "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/now-ui-pro-react-native/project21.jpg"
+    "title": "Juegos diventidos para aprender.",
+    "image": "assets/imgs/satoru-gojo.png"
   }
 };
 
@@ -45,10 +42,14 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: Navbar(
-          title: "Home",
-          searchBar: true,
-          categoryOne: "Trending",
-          categoryTwo: "Fashion",
+          title: "Mano Amiga Tec",
+          searchBar: false,
+          tags: [], // List<String>
+          getCurrentPage: () => 1, // Una función que retorne int
+          searchController: TextEditingController(),
+          searchOnChanged: (text) {
+            // Lógica al cambiar texto
+          },
         ),
         backgroundColor: NowUIColors.bgColorScreen,
         // key: _scaffoldKey,
@@ -61,11 +62,11 @@ class Home extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 16.0),
                   child: CardHorizontal(
-                      cta: "View article",
-                      title: homeCards["Ice Cream"]['title'],
-                      img: homeCards["Ice Cream"]['image'],
+                      cta: "Ingresar",
+                      title: homeCards["Ice Cream"]!['title']!,
+                      img: homeCards["Ice Cream"]!['image']!,
                       tap: () {
-                        Navigator.pushNamed(context, '/pro');
+                        Navigator.pushNamed(context, '/singtotext');
                       }),
                 ),
                 SizedBox(height: 8.0),
@@ -73,36 +74,38 @@ class Home extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CardSmall(
-                        cta: "View article",
-                        title: homeCards["Makeup"]['title'],
-                        img: homeCards["Makeup"]['image'],
-                        tap: () {}),
-                    CardSmall(
-                        cta: "View article",
-                        title: homeCards["Coffee"]['title'],
-                        img: homeCards["Coffee"]['image'],
+                        cta: "Ingresar",
+                        title: homeCards["Makeup"]!['title']!,
+                        img: homeCards["Makeup"]!['image']!,
                         tap: () {
-                          Navigator.pushNamed(context, '/pro');
+                          Navigator.pushNamed(context, '/texttosing');
+                        }),
+                    CardSmall(
+                        cta: "Ingresar",
+                        title: homeCards["Coffee"]!['title']!,
+                        img: homeCards["Coffee"]!['image']!,
+                        tap: () {
+                          Navigator.pushNamed(context, '/history');
                         })
                   ],
                 ),
                 SizedBox(height: 8.0),
-                CardHorizontal(
-                    cta: "View article",
-                    title: homeCards["Fashion"]['title'],
-                    img: homeCards["Fashion"]['image'],
+                /*CardHorizontal(
+                    cta: "Ingresar",
+                    title: homeCards["Fashion"]!['title']!,
+                    img: homeCards["Fashion"]!['image']!,
                     tap: () {
                       Navigator.pushNamed(context, '/pro');
                     }),
-                SizedBox(height: 8.0),
+                SizedBox(height: 8.0),*/
                 Padding(
                   padding: const EdgeInsets.only(bottom: 32.0),
                   child: CardSquare(
-                      cta: "View article",
-                      title: homeCards["Argon"]['title'],
-                      img: homeCards["Argon"]['image'],
+                      cta: "Ingresar",
+                      title: homeCards["Argon"]!['title']!,
+                      img: homeCards["Argon"]!['image']!,
                       tap: () {
-                        Navigator.pushNamed(context, '/pro');
+                        Navigator.pushNamed(context, '/games');
                       }),
                 )
               ],

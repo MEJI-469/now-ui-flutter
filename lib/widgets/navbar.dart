@@ -23,28 +23,29 @@ class Navbar extends StatefulWidget implements PreferredSizeWidget {
   final Function getCurrentPage;
   final bool isOnSearch;
   final TextEditingController searchController;
-  final Function searchOnChanged;
+  final ValueChanged<String> searchOnChanged;
   final bool searchAutofocus;
   final bool noShadow;
   final Color bgColor;
 
-  Navbar(
-      {this.title = "Home",
-      this.categoryOne = "",
-      this.categoryTwo = "",
-      this.tags,
-      this.transparent = false,
-      this.rightOptions = true,
-      this.reverseTextcolor = false,
-      this.getCurrentPage,
-      this.searchController,
-      this.isOnSearch = false,
-      this.searchOnChanged,
-      this.searchAutofocus = false,
-      this.backButton = false,
-      this.noShadow = false,
-      this.bgColor = NowUIColors.white,
-      this.searchBar = false});
+  Navbar({
+    this.title = "Home",
+    this.categoryOne = "",
+    this.categoryTwo = "",
+    required this.tags,
+    this.transparent = false,
+    this.rightOptions = true,
+    this.reverseTextcolor = false,
+    required this.getCurrentPage,
+    required this.searchController,
+    this.isOnSearch = false,
+    required this.searchOnChanged,
+    this.searchAutofocus = false,
+    this.backButton = false,
+    this.noShadow = false,
+    this.bgColor = NowUIColors.white,
+    this.searchBar = false,
+  });
 
   final double _prefferedHeight = 180.0;
 
@@ -56,7 +57,7 @@ class Navbar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _NavbarState extends State<Navbar> {
-  String activeTag;
+  late String activeTag;
 
   ItemScrollController _scrollController = ItemScrollController();
 
@@ -140,7 +141,7 @@ class _NavbarState extends State<Navbar> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          GestureDetector(
+                          /*GestureDetector(
                             onTap: () {
                               // Navigator.push(
                               //     context,
@@ -177,7 +178,7 @@ class _NavbarState extends State<Navbar> {
                                             : NowUIColors.white),
                                     size: 22.0),
                                 onPressed: null),
-                          ),
+                          ),*/
                         ],
                       )
                   ],
@@ -187,6 +188,7 @@ class _NavbarState extends State<Navbar> {
                     padding: const EdgeInsets.only(
                         top: 8, bottom: 4, left: 15, right: 15),
                     child: Input(
+                        prefixIcon: Icon(Icons.search),
                         placeholder: "What are you looking for?",
                         controller: widget.searchController,
                         onChanged: widget.searchOnChanged,

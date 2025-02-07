@@ -5,14 +5,14 @@ import 'package:now_ui_flutter/constants/Theme.dart';
 class DrawerTile extends StatelessWidget {
   final String title;
   final IconData icon;
-  final Function onTap;
+  final VoidCallback onTap;
   final bool isSelected;
   final Color iconColor;
 
   DrawerTile(
-      {this.title,
-      this.icon,
-      this.onTap,
+      {required this.title,
+      required this.icon,
+      required this.onTap,
       this.isSelected = false,
       this.iconColor = NowUIColors.text});
 

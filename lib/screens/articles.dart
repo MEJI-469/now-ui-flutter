@@ -56,11 +56,11 @@ final Map<String, Map<String, dynamic>> articlesCards = {
       },
       {
         "img":
-            "https://images.unsplash.com/photo-1500628550463-c8881a54d4d4?fit=crop&w=2698&q=80",
-        "title": "Art Gallery",
+            "https://scontent.floh4-1.fna.fbcdn.net/v/t39.30808-6/464858886_2382641502067015_9201867715336565630_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=8XVBU4qgw8QQ7kNvgElyuC7&_nc_oc=AdgWpYocSKdtap4zxF5HdWWh7P09QUZn9FLSlyKxD7fL42iLMDomsCdAZ4QpBpRxzFw&_nc_zt=23&_nc_ht=scontent.floh4-1.fna&_nc_gid=ATaWw-TeOQdavA7a1mhIvHB&oh=00_AYBHKl8MbYBkL-fRxVtFzC3c0wbEyum6_1uTBK5ju33rVA&oe=67A7F944",
+        "title": "Derek Vergara",
         "description":
-            "Don't forget to visit one of the coolest art galleries in town.",
-        "price": "\$200",
+            "Premio doble, se cree que puede mandar por ser Scrum Master.",
+        "price": "\$Free",
       },
       {
         "img":
@@ -93,6 +93,12 @@ class Articles extends StatelessWidget {
         appBar: Navbar(
           title: "Articles",
           rightOptions: false,
+          tags: [], // List<String>
+          getCurrentPage: () => 1, // Una función que retorne int
+          searchController: TextEditingController(),
+          searchOnChanged: (text) {
+            // Lógica al cambiar texto
+          },
         ),
         backgroundColor: NowUIColors.bgColorScreen,
         drawer: NowDrawer(currentPage: "Articles"),
@@ -116,8 +122,8 @@ class Articles extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 16.0),
                     child: CardHorizontal(
                         cta: "View article",
-                        title: articlesCards["Ice Cream"]['title'],
-                        img: articlesCards["Ice Cream"]['image'],
+                        title: articlesCards["Ice Cream"]!['title'],
+                        img: articlesCards["Ice Cream"]!['image'],
                         tap: () {
                           Navigator.pushNamed(context, '/pro');
                         }),
@@ -127,15 +133,15 @@ class Articles extends StatelessWidget {
                     children: [
                       CardSmall(
                           cta: "View article",
-                          title: articlesCards["Makeup"]['title'],
-                          img: articlesCards["Makeup"]['image'],
+                          title: articlesCards["Makeup"]!['title'],
+                          img: articlesCards["Makeup"]!['image'],
                           tap: () {
                             Navigator.pushNamed(context, '/pro');
                           }),
                       CardSmall(
                           cta: "View article",
-                          title: articlesCards["Coffee"]['title'],
-                          img: articlesCards["Coffee"]['image'],
+                          title: articlesCards["Coffee"]!['title'],
+                          img: articlesCards["Coffee"]!['image'],
                           tap: () {
                             Navigator.pushNamed(context, '/pro');
                           })
@@ -144,16 +150,16 @@ class Articles extends StatelessWidget {
                   SizedBox(height: 8.0),
                   CardHorizontal(
                       cta: "View article",
-                      title: articlesCards["Fashion"]['title'],
-                      img: articlesCards["Fashion"]['image'],
+                      title: articlesCards["Fashion"]!['title'],
+                      img: articlesCards["Fashion"]!['image'],
                       tap: () {
                         Navigator.pushNamed(context, '/pro');
                       }),
                   SizedBox(height: 8.0),
                   CardSquare(
                       cta: "View article",
-                      title: articlesCards["Argon"]['title'],
-                      img: articlesCards["Argon"]['image'],
+                      title: articlesCards["Argon"]!['title'],
+                      img: articlesCards["Argon"]!['image'],
                       tap: () {
                         Navigator.pushNamed(context, '/pro');
                       }),
@@ -161,8 +167,8 @@ class Articles extends StatelessWidget {
                       tap: () {
                         Navigator.pushNamed(context, '/pro');
                       },
-                      title: articlesCards["Music"]["title"],
-                      img: articlesCards["Music"]["image"]),
+                      title: articlesCards["Music"]!["title"],
+                      img: articlesCards["Music"]!["image"]),
                   Padding(
                       padding: EdgeInsets.only(left: 25, right: 25, top: 32),
                       child: Row(
@@ -251,7 +257,8 @@ class Articles extends StatelessWidget {
                           )),
                         ]),
                   ),
-                  ProductCarousel(imgArray: articlesCards["Music"]["products"]),
+                  ProductCarousel(
+                      imgArray: articlesCards["Music"]!["products"]),
                 ],
               ),
             )));

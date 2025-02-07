@@ -18,27 +18,34 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  scrollable_positioned_list: ^0.1.7
-  carousel_slider: ^2.2.1
-  url_launcher: ^5.5.2
-  font_awesome_flutter: ^8.8.1
+  scrollable_positioned_list: ^0.3.8
+  carousel_slider: ^5.0.0
+  url_launcher: ^6.3.1
+  font_awesome_flutter: ^10.8.0
+  http: ^1.0.0
+  flutter_spinkit: ^5.2.0
+  
+  intl: ^0.18.0
+  shared_preferences: ^2.3.5
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.0
+  cupertino_icons: ^1.0.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  camera: ^0.11.0
+  flutter_tts: ^3.2.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
+  flutter_lints: ^5.0.0
 # The following section is specific to Flutter.
 flutter:
 
@@ -65,6 +72,10 @@ flutter:
     - assets/imgs/album-6.jpg
     - assets/imgs/onboarding-free.png
     - assets/imgs/invision-white-slim.png
+    - assets/imgs/logo-mat.png
+    - assets/imgs/juegos-fondo.png
+    - assets/imgs/
+    - assets/sign/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

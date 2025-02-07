@@ -8,8 +8,8 @@ class ProductCarousel extends StatefulWidget {
   final List<Map<String, String>> imgArray;
 
   const ProductCarousel({
-    Key key,
-    @required this.imgArray,
+    Key? key,
+    required this.imgArray,
   }) : super(key: key);
 
   @override
@@ -41,7 +41,7 @@ class _ProductCarouselState extends State<ProductCarousel> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(4),
                             child: Image.network(
-                              item["img"],
+                              item["img"]!,
                               fit: BoxFit.cover,
                               alignment: Alignment.topCenter,
                             ),
@@ -53,17 +53,17 @@ class _ProductCarouselState extends State<ProductCarousel> {
                       padding: const EdgeInsets.only(top: 16.0),
                       child: Column(
                         children: [
-                          Text(item["price"],
+                          Text(item["price"]!,
                               style: TextStyle(
                                   fontSize: 16, color: NowUIColors.text)),
-                          Text(item["title"],
+                          Text(item["title"]!,
                               style: TextStyle(
                                   fontSize: 32, color: NowUIColors.text)),
                           Padding(
                             padding: const EdgeInsets.only(
                                 left: 16.0, right: 16.0, top: 8),
                             child: Text(
-                              item["description"],
+                              item["description"]!,
                               style: TextStyle(
                                   fontSize: 16, color: NowUIColors.muted),
                               textAlign: TextAlign.center,

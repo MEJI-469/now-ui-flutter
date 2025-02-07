@@ -6,11 +6,10 @@ import 'package:now_ui_flutter/constants/Theme.dart';
 
 class Pro extends StatelessWidget {
   _launchURL() async {
-    const url = 'https://creative-tim.com';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
+    final Uri _url = Uri.parse('https://creative-tim.com');
+
+    if (!await launchUrl(_url)) {
+      throw 'No se pudo lanzar $_url';
     }
   }
 
@@ -125,13 +124,17 @@ class Pro extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 16.0),
                         child: SizedBox(
                           width: double.infinity,
-                          child: FlatButton(
-                            textColor: NowUIColors.white,
-                            color: NowUIColors.info,
-                            onPressed: _launchURL,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4.0),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              foregroundColor:
+                                  NowUIColors.white, // color del texto
+                              backgroundColor:
+                                  NowUIColors.info, // color del botón
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4.0),
+                              ),
                             ),
+                            onPressed: _launchURL,
                             child: Padding(
                                 padding: EdgeInsets.only(
                                     left: 16.0,

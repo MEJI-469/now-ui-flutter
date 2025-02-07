@@ -4,8 +4,8 @@ import 'package:now_ui_flutter/constants/Theme.dart';
 
 class TableCellSettings extends StatelessWidget {
   final String title;
-  final Function onTap;
-  TableCellSettings({this.title, this.onTap});
+  final VoidCallback onTap;
+  TableCellSettings({required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

@@ -5,21 +5,28 @@ class Input extends StatelessWidget {
   final String placeholder;
   final Widget suffixIcon;
   final Widget prefixIcon;
-  final Function onTap;
-  final Function onChanged;
+  final VoidCallback onTap;
+  final ValueChanged<String> onChanged;
   final TextEditingController controller;
   final bool autofocus;
   final Color borderColor;
 
-  Input(
-      {this.placeholder,
-      this.suffixIcon,
-      this.prefixIcon,
-      this.onTap,
-      this.onChanged,
-      this.autofocus = false,
-      this.borderColor = NowUIColors.border,
-      this.controller});
+  // NUEVO: agregamos estas propiedades
+  final bool obscureText;
+  final TextInputType keyboardType;
+
+  Input({
+    required this.placeholder,
+    required this.suffixIcon,
+    required this.prefixIcon,
+    required this.onTap,
+    required this.onChanged,
+    this.autofocus = false,
+    this.borderColor = NowUIColors.border,
+    required this.controller,
+    this.obscureText = false,
+    this.keyboardType = TextInputType.text,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +36,9 @@ class Input extends StatelessWidget {
         onChanged: onChanged,
         controller: controller,
         autofocus: autofocus,
+        // NUEVO: aquí usas los nuevos parámetros
+        obscureText: obscureText,
+        keyboardType: keyboardType,
         style: TextStyle(height: 0.55, fontSize: 13.0, color: NowUIColors.time),
         textAlignVertical: TextAlignVertical(y: 0.6),
         decoration: InputDecoration(

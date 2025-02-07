@@ -9,14 +9,13 @@ import 'package:now_ui_flutter/widgets/drawer-tile.dart';
 class NowDrawer extends StatelessWidget {
   final String currentPage;
 
-  NowDrawer({this.currentPage});
+  NowDrawer({required this.currentPage});
 
   _launchURL() async {
-    const url = 'https://creative-tim.com';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
+    final Uri _url = Uri.parse('https://creative-tim.com');
+
+    if (!await launchUrl(_url)) {
+      throw 'No se pudo lanzar $_url';
     }
   }
 
@@ -38,7 +37,7 @@ class NowDrawer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.baseline,
                   textBaseline: TextBaseline.alphabetic,
                   children: [
-                    Image.asset("assets/imgs/now-logo.png"),
+                    Image.asset("assets/imgs/logo_manos.png"),
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
                       child: IconButton(
@@ -70,21 +69,21 @@ class NowDrawer extends StatelessWidget {
               DrawerTile(
                   icon: FontAwesomeIcons.dharmachakra,
                   onTap: () {
-                    if (currentPage != "Components")
-                      Navigator.pushReplacementNamed(context, '/components');
+                    if (currentPage != "Games")
+                      Navigator.pushReplacementNamed(context, '/games');
                   },
                   iconColor: NowUIColors.error,
-                  title: "Components",
-                  isSelected: currentPage == "Components" ? true : false),
+                  title: "Juegos",
+                  isSelected: currentPage == "Games" ? true : false),
               DrawerTile(
                   icon: FontAwesomeIcons.newspaper,
                   onTap: () {
-                    if (currentPage != "Articles")
-                      Navigator.pushReplacementNamed(context, '/articles');
+                    if (currentPage != "Alphabet")
+                      Navigator.pushReplacementNamed(context, '/alphabet');
                   },
                   iconColor: NowUIColors.primary,
-                  title: "Articles",
-                  isSelected: currentPage == "Articles" ? true : false),
+                  title: "Abecedario",
+                  isSelected: currentPage == "Alphabet" ? true : false),
               DrawerTile(
                   icon: FontAwesomeIcons.user,
                   onTap: () {
@@ -92,17 +91,17 @@ class NowDrawer extends StatelessWidget {
                       Navigator.pushReplacementNamed(context, '/profile');
                   },
                   iconColor: NowUIColors.warning,
-                  title: "Profile",
+                  title: "Perfil",
                   isSelected: currentPage == "Profile" ? true : false),
-              DrawerTile(
+              /*DrawerTile(
                   icon: FontAwesomeIcons.fileInvoice,
                   onTap: () {
-                    if (currentPage != "Account")
-                      Navigator.pushReplacementNamed(context, '/account');
+                    if (currentPage != "History")
+                      Navigator.pushReplacementNamed(context, '/history');
                   },
                   iconColor: NowUIColors.info,
-                  title: "Account",
-                  isSelected: currentPage == "Account" ? true : false),
+                  title: "Historial",
+                  isSelected: currentPage == "History" ? true : false),*/
               DrawerTile(
                   icon: FontAwesomeIcons.cog,
                   onTap: () {
@@ -110,8 +109,17 @@ class NowDrawer extends StatelessWidget {
                       Navigator.pushReplacementNamed(context, '/settings');
                   },
                   iconColor: NowUIColors.success,
-                  title: "Settings",
+                  title: "Ajustes",
                   isSelected: currentPage == "Settings" ? true : false),
+              DrawerTile(
+                  icon: FontAwesomeIcons.windows,
+                  onTap: () {
+                    if (currentPage != "Screens Templates")
+                      Navigator.pushReplacementNamed(context, '/screens');
+                  },
+                  iconColor: NowUIColors.success,
+                  title: "Screen templates",
+                  isSelected: currentPage == "Screens" ? true : false),
             ],
           ),
         ),
@@ -130,7 +138,7 @@ class NowDrawer extends StatelessWidget {
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 16.0, left: 16, bottom: 8),
-                    child: Text("DOCUMENTATION",
+                    child: Text("INFORMACIÓN",
                         style: TextStyle(
                           color: NowUIColors.white.withOpacity(0.8),
                           fontSize: 13,
@@ -140,7 +148,7 @@ class NowDrawer extends StatelessWidget {
                       icon: FontAwesomeIcons.satellite,
                       onTap: _launchURL,
                       iconColor: NowUIColors.muted,
-                      title: "Getting Started",
+                      title: "Sobre Nuestra App",
                       isSelected:
                           currentPage == "Getting started" ? true : false),
                 ],

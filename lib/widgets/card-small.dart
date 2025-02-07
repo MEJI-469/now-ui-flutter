@@ -10,7 +10,7 @@ class CardSmall extends StatelessWidget {
 
   final String cta;
   final String img;
-  final Function tap;
+  final VoidCallback tap;
   final String title;
 
   static void defaultFunc() {
@@ -40,7 +40,10 @@ class CardSmall extends StatelessWidget {
                                 topLeft: Radius.circular(4.0),
                                 topRight: Radius.circular(4.0)),
                             image: DecorationImage(
-                              image: NetworkImage(img),
+                              // Aquí chequeamos si es un asset local o una URL
+                              image: img.startsWith('assets/')
+                                  ? AssetImage(img)
+                                  : NetworkImage(img) as ImageProvider<Object>,
                               fit: BoxFit.cover,
                             )))),
                 Flexible(

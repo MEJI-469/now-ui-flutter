@@ -14,8 +14,8 @@ class Components extends StatefulWidget {
 }
 
 class _ComponentsState extends State<Components> {
-  bool switchValueOne;
-  bool switchValueTwo;
+  late bool switchValueOne;
+  late bool switchValueTwo;
 
   void initState() {
     setState(() {
@@ -30,6 +30,12 @@ class _ComponentsState extends State<Components> {
     return Scaffold(
         appBar: Navbar(
           title: "Components",
+          tags: [], // List<String>
+          getCurrentPage: () => 1, // Una función que retorne int
+          searchController: TextEditingController(),
+          searchOnChanged: (text) {
+            // Lógica al cambiar texto
+          },
         ),
         backgroundColor: NowUIColors.bgColorScreen,
         drawer: NowDrawer(currentPage: "Components"),
@@ -52,16 +58,20 @@ class _ComponentsState extends State<Components> {
               ),
               SizedBox(
                 width: double.infinity,
-                child: RaisedButton(
-                  textColor: NowUIColors.white,
-                  color: NowUIColors.defaultColor,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        NowUIColors.defaultColor, // Color del botón
+                    foregroundColor: NowUIColors.white, // Color del texto
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4.0),
+                    ),
+                    // padding, etc.
+                  ),
                   onPressed: () {
                     // Respond to button press
                     Navigator.pushReplacementNamed(context, '/home');
                   },
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4.0),
-                  ),
                   child: Padding(
                       padding: EdgeInsets.only(
                           left: 16.0, right: 16.0, top: 12, bottom: 12),
@@ -72,16 +82,19 @@ class _ComponentsState extends State<Components> {
                 width: double.infinity,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: RaisedButton(
-                    textColor: NowUIColors.white,
-                    color: NowUIColors.primary,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: NowUIColors.primary, // Color del botón
+                      foregroundColor: NowUIColors.white, // Color del texto
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                      ),
+                      // padding, etc.
+                    ),
                     onPressed: () {
                       // Respond to button press
                       Navigator.pushReplacementNamed(context, '/home');
                     },
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
                     child: Padding(
                         padding: EdgeInsets.only(
                             left: 16.0, right: 16.0, top: 12, bottom: 12),
@@ -94,16 +107,19 @@ class _ComponentsState extends State<Components> {
                 width: double.infinity,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: RaisedButton(
-                    textColor: NowUIColors.white,
-                    color: NowUIColors.info,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: NowUIColors.info, // Color del botón
+                      foregroundColor: NowUIColors.white, // Color del texto
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                      ),
+                      // padding, etc.
+                    ),
                     onPressed: () {
                       // Respond to button press
                       Navigator.pushReplacementNamed(context, '/home');
                     },
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
                     child: Padding(
                         padding: EdgeInsets.only(
                             left: 16.0, right: 16.0, top: 12, bottom: 12),
@@ -115,16 +131,19 @@ class _ComponentsState extends State<Components> {
                 width: double.infinity,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: RaisedButton(
-                    textColor: NowUIColors.white,
-                    color: NowUIColors.success,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: NowUIColors.success, // Color del botón
+                      foregroundColor: NowUIColors.white, // Color del texto
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                      ),
+                      // padding, etc.
+                    ),
                     onPressed: () {
                       // Respond to button press
                       Navigator.pushReplacementNamed(context, '/home');
                     },
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
                     child: Padding(
                         padding: EdgeInsets.only(
                             left: 16.0, right: 16.0, top: 12, bottom: 12),
@@ -137,16 +156,19 @@ class _ComponentsState extends State<Components> {
                 width: double.infinity,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: RaisedButton(
-                    textColor: NowUIColors.white,
-                    color: NowUIColors.warning,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: NowUIColors.warning, // Color del botón
+                      foregroundColor: NowUIColors.white, // Color del texto
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                      ),
+                      // padding, etc.
+                    ),
                     onPressed: () {
                       // Respond to button press
                       Navigator.pushReplacementNamed(context, '/home');
                     },
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
                     child: Padding(
                         padding: EdgeInsets.only(
                             left: 16.0, right: 16.0, top: 12, bottom: 12),
@@ -159,16 +181,19 @@ class _ComponentsState extends State<Components> {
                 width: double.infinity,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: RaisedButton(
-                    textColor: NowUIColors.white,
-                    color: NowUIColors.error,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: NowUIColors.error, // Color del botón
+                      foregroundColor: NowUIColors.white, // Color del texto
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                      ),
+                      // padding, etc.
+                    ),
                     onPressed: () {
                       // Respond to button press
                       Navigator.pushReplacementNamed(context, '/home');
                     },
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
                     child: Padding(
                         padding: EdgeInsets.only(
                             left: 16.0, right: 16.0, top: 12, bottom: 12),
@@ -240,6 +265,11 @@ class _ComponentsState extends State<Components> {
                 padding: const EdgeInsets.only(top: 32.0),
                 child: Input(
                   placeholder: "Regular",
+                  prefixIcon: Icon(Icons.search),
+                  suffixIcon: Icon(Icons.clear),
+                  onTap: () {/* Acción cuando tocan el campo */},
+                  onChanged: (String text) {/* Manejo de texto */},
+                  controller: TextEditingController(),
                 ),
               ),
               Padding(
@@ -247,6 +277,11 @@ class _ComponentsState extends State<Components> {
                 child: Input(
                   placeholder: "Custom border",
                   borderColor: NowUIColors.info,
+                  prefixIcon: Icon(Icons.search),
+                  suffixIcon: Icon(Icons.clear),
+                  onTap: () {/* Acción cuando tocan el campo */},
+                  onChanged: (String text) {/* Manejo de texto */},
+                  controller: TextEditingController(),
                 ),
               ),
               Padding(
@@ -254,6 +289,10 @@ class _ComponentsState extends State<Components> {
                 child: Input(
                   placeholder: "Icon left",
                   prefixIcon: Icon(Icons.ac_unit),
+                  suffixIcon: Icon(Icons.clear),
+                  onTap: () {/* Acción cuando tocan el campo */},
+                  onChanged: (String text) {/* Manejo de texto */},
+                  controller: TextEditingController(),
                 ),
               ),
               Padding(
@@ -261,6 +300,10 @@ class _ComponentsState extends State<Components> {
                 child: Input(
                   placeholder: "Icon right",
                   suffixIcon: Icon(Icons.ac_unit),
+                  prefixIcon: Icon(Icons.search),
+                  onTap: () {/* Acción cuando tocan el campo */},
+                  onChanged: (String text) {/* Manejo de texto */},
+                  controller: TextEditingController(),
                 ),
               ),
               Padding(
@@ -270,6 +313,10 @@ class _ComponentsState extends State<Components> {
                   borderColor: NowUIColors.success,
                   suffixIcon:
                       Icon(Icons.check_circle, color: NowUIColors.success),
+                  prefixIcon: Icon(Icons.search),
+                  onTap: () {/* Acción cuando tocan el campo */},
+                  onChanged: (String text) {/* Manejo de texto */},
+                  controller: TextEditingController(),
                 ),
               ),
               Padding(
@@ -278,6 +325,10 @@ class _ComponentsState extends State<Components> {
                   placeholder: "Custom error",
                   borderColor: NowUIColors.error,
                   suffixIcon: Icon(Icons.error, color: NowUIColors.error),
+                  prefixIcon: Icon(Icons.search),
+                  onTap: () {/* Acción cuando tocan el campo */},
+                  onChanged: (String text) {/* Manejo de texto */},
+                  controller: TextEditingController(),
                 ),
               ),
               Padding(
@@ -331,13 +382,26 @@ class _ComponentsState extends State<Components> {
               Navbar(
                 title: "Regular",
                 backButton: false,
+                tags: [], // List<String>
+                getCurrentPage: () => 1, // Una función que retorne int
+                searchController: TextEditingController(),
+                searchOnChanged: (text) {
+                  // Lógica al cambiar texto
+                },
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
                 child: Navbar(
-                    title: "Custom",
-                    backButton: true,
-                    bgColor: NowUIColors.primary),
+                  title: "Custom",
+                  backButton: true,
+                  bgColor: NowUIColors.primary,
+                  tags: [], // List<String>
+                  getCurrentPage: () => 1, // Una función que retorne int
+                  searchController: TextEditingController(),
+                  searchOnChanged: (text) {
+                    // Lógica al cambiar texto
+                  },
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
@@ -347,6 +411,12 @@ class _ComponentsState extends State<Components> {
                   categoryOne: "Incredible",
                   categoryTwo: "Customization",
                   backButton: true,
+                  tags: [], // List<String>
+                  getCurrentPage: () => 1, // Una función que retorne int
+                  searchController: TextEditingController(),
+                  searchOnChanged: (text) {
+                    // Lógica al cambiar texto
+                  },
                 ),
               ),
               Padding(
@@ -355,6 +425,12 @@ class _ComponentsState extends State<Components> {
                   title: "Search",
                   searchBar: true,
                   backButton: true,
+                  tags: [], // List<String>
+                  getCurrentPage: () => 1, // Una función que retorne int
+                  searchController: TextEditingController(),
+                  searchOnChanged: (text) {
+                    // Lógica al cambiar texto
+                  },
                 ),
               ),
               Padding(
