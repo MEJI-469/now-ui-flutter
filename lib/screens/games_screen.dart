@@ -19,6 +19,8 @@ import 'package:now_ui_flutter/widgets/input.dart';
 import 'package:now_ui_flutter/widgets/drawer.dart';
 
 class GamesScreen extends StatefulWidget {
+  const GamesScreen({Key? key}) : super(key: key);
+
   @override
   _GamesScreenState createState() => _GamesScreenState();
 }

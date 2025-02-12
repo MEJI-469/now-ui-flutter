@@ -56,6 +56,7 @@ class UsuarioService {
     } else {
       throw Exception("Error en el servidor: ${response.statusCode}");
     }
+    return null;
   }
 
   // Método para registrar un usuario

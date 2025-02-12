@@ -15,6 +15,8 @@ import 'package:now_ui_flutter/widgets/input.dart';
 import 'package:now_ui_flutter/widgets/drawer.dart';
 
 class History extends StatefulWidget {
+  const History({Key? key}) : super(key: key);
+
   @override
   _HistoryState createState() => _HistoryState();
 }
@@ -23,7 +25,7 @@ class _HistoryState extends State<History> {
   List<CargarTraduccion> _historial = [];
   bool _isLoading = true;
 
-  bool _checkboxValue = false;
+  final bool _checkboxValue = false;
 
   final double height = window.physicalSize.height;
 

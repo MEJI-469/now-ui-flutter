@@ -26,6 +26,8 @@ import 'package:now_ui_flutter/widgets/check_session.dart'; // donde definiste l
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

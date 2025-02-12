@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:now_ui_flutter/constants/Theme.dart';
 
 class Onboarding extends StatelessWidget {
+  const Onboarding({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +40,7 @@ class Onboarding extends StatelessWidget {
                         child: Center(
                           child: Column(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: MediaQuery.of(context).size.width / 3,
                                 child: FittedBox(
                                   fit: BoxFit.contain,
@@ -51,7 +53,7 @@ class Onboarding extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 width: MediaQuery.of(context).size.width / 3,
                                 child: FittedBox(
                                   fit: BoxFit.contain,

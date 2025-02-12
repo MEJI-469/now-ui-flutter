@@ -13,6 +13,8 @@ import 'package:now_ui_flutter/widgets/drawer.dart';
 import 'package:now_ui_flutter/services/usuario_service.dart';
 
 class Register extends StatefulWidget {
+  const Register({Key? key}) : super(key: key);
+
   @override
   _RegisterState createState() => _RegisterState();
 }

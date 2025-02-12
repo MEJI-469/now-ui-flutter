@@ -9,13 +9,13 @@ import 'package:now_ui_flutter/widgets/drawer-tile.dart';
 class NowDrawer extends StatelessWidget {
   final String currentPage;
 
-  NowDrawer({required this.currentPage});
+  const NowDrawer({Key? key, required this.currentPage}) : super(key: key);
 
   _launchURL() async {
-    final Uri _url = Uri.parse('https://creative-tim.com');
+    final Uri url = Uri.parse('https://creative-tim.com');
 
-    if (!await launchUrl(_url)) {
-      throw 'No se pudo lanzar $_url';
+    if (!await launchUrl(url)) {
+      throw 'No se pudo lanzar $url';
     }
   }
 
@@ -25,7 +25,7 @@ class NowDrawer extends StatelessWidget {
         child: Container(
       color: NowUIColors.primary,
       child: Column(children: [
-        Container(
+        SizedBox(
             height: MediaQuery.of(context).size.height * 0.1,
             width: MediaQuery.of(context).size.width * 0.85,
             child: SafeArea(
@@ -60,8 +60,9 @@ class NowDrawer extends StatelessWidget {
               DrawerTile(
                   icon: FontAwesomeIcons.home,
                   onTap: () {
-                    if (currentPage != "Home")
+                    if (currentPage != "Home") {
                       Navigator.pushReplacementNamed(context, '/home');
+                    }
                   },
                   iconColor: NowUIColors.primary,
                   title: "Home",
@@ -69,8 +70,9 @@ class NowDrawer extends StatelessWidget {
               DrawerTile(
                   icon: FontAwesomeIcons.dharmachakra,
                   onTap: () {
-                    if (currentPage != "Games")
+                    if (currentPage != "Games") {
                       Navigator.pushReplacementNamed(context, '/games');
+                    }
                   },
                   iconColor: NowUIColors.error,
                   title: "Juegos",
@@ -78,8 +80,9 @@ class NowDrawer extends StatelessWidget {
               DrawerTile(
                   icon: FontAwesomeIcons.newspaper,
                   onTap: () {
-                    if (currentPage != "Alphabet")
+                    if (currentPage != "Alphabet") {
                       Navigator.pushReplacementNamed(context, '/alphabet');
+                    }
                   },
                   iconColor: NowUIColors.primary,
                   title: "Abecedario",
@@ -87,8 +90,9 @@ class NowDrawer extends StatelessWidget {
               DrawerTile(
                   icon: FontAwesomeIcons.user,
                   onTap: () {
-                    if (currentPage != "Profile")
+                    if (currentPage != "Profile") {
                       Navigator.pushReplacementNamed(context, '/profile');
+                    }
                   },
                   iconColor: NowUIColors.warning,
                   title: "Perfil",
@@ -105,8 +109,9 @@ class NowDrawer extends StatelessWidget {
               DrawerTile(
                   icon: FontAwesomeIcons.cog,
                   onTap: () {
-                    if (currentPage != "Settings")
+                    if (currentPage != "Settings") {
                       Navigator.pushReplacementNamed(context, '/settings');
+                    }
                   },
                   iconColor: NowUIColors.success,
                   title: "Ajustes",
@@ -114,8 +119,9 @@ class NowDrawer extends StatelessWidget {
               DrawerTile(
                   icon: FontAwesomeIcons.windows,
                   onTap: () {
-                    if (currentPage != "Screens Templates")
+                    if (currentPage != "Screens Templates") {
                       Navigator.pushReplacementNamed(context, '/screens');
+                    }
                   },
                   iconColor: NowUIColors.success,
                   title: "Screen templates",

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:now_ui_flutter/constants/Theme.dart';
 
 class CardCategory extends StatelessWidget {
-  CardCategory(
-      {this.title = "Placeholder Title",
+  const CardCategory(
+      {Key? key, this.title = "Placeholder Title",
       this.img = "https://via.placeholder.com/250",
-      this.tap = defaultFunc});
+      this.tap = defaultFunc}) : super(key: key);
 
   final String img;
   final VoidCallback tap;
@@ -17,7 +17,7 @@ class CardCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         height: 252,
         width: null,
         child: GestureDetector(

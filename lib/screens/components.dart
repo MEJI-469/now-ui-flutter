@@ -9,6 +9,8 @@ import 'package:now_ui_flutter/widgets/input.dart';
 import 'package:now_ui_flutter/widgets/table-cell.dart';
 
 class Components extends StatefulWidget {
+  const Components({Key? key}) : super(key: key);
+
   @override
   _ComponentsState createState() => _ComponentsState();
 }
@@ -17,6 +19,7 @@ class _ComponentsState extends State<Components> {
   late bool switchValueOne;
   late bool switchValueTwo;
 
+  @override
   void initState() {
     setState(() {
       switchValueOne = true;

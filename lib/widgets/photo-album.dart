@@ -4,7 +4,7 @@ import 'package:now_ui_flutter/constants/Theme.dart';
 class PhotoAlbum extends StatelessWidget {
   final List<String> imgArray;
 
-  PhotoAlbum({required this.imgArray});
+  const PhotoAlbum({Key? key, required this.imgArray}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

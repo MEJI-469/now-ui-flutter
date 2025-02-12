@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'dart:math' as math;
+import 'dart:convert';
+import 'dart:typed_data';
+import 'package:http/http.dart' as http;
+import 'dart:async'; // Importar para usar Timer
+import '../constants/Theme.dart';
+
+Timer? _captureTimer;
+late bool switchValueOne;
 
 class SignToTextScreen extends StatefulWidget {
   //const SignToTextScreen({super.key});
@@ -15,20 +24,66 @@ class _SignToTextScreenState extends State<SignToTextScreen>
   bool isCameraInitialized = false;
   String translatedText = "";
   final FlutterTts flutterTts = FlutterTts();
+  List<CameraDescription> cameras = [];
+  int selectedCameraIndex = 0;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     initializeCamera();
+    switchValueOne = false;
     _initTts();
+
+    // Iniciar el timer para capturar imágenes cada 2 segundos
+    _captureTimer = Timer.periodic(Duration(seconds: 2), (timer) {
+      if (isCameraInitialized) {
+        captureAndSendImage();
+      }
+    });
   }
 
-  void initializeCamera() async {
-    final cameras = await availableCameras();
+  // Método para capturar imagen, convertirla a base64 y enviar al servidor
+  Future<void> captureAndSendImage() async {
+    if (!_cameraController.value.isInitialized) return;
+
+    try {
+      // Capturar la imagen
+      final XFile imageFile = await _cameraController.takePicture();
+      final bytes = await imageFile.readAsBytes();
+
+      // Convertir la imagen a base64
+      String base64Image = base64Encode(bytes);
+      base64Image =
+          'data:image/jpeg;base64,$base64Image'; // Asegúrate de que el formato coincide con el del backend
+
+      // Enviar la imagen al backend
+      final response = await http.post(
+        Uri.parse(
+            'http://192.168.52.17:5000/predict'), // Cambia esto por tu IP local si estás usando un dispositivo físico
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'image': base64Image}),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        setState(() {
+          translatedText +=
+              data['prediction']; // Añadir la letra detectada al campo de texto
+        });
+      } else {
+        print('Error en la predicción: ${response.body}');
+      }
+    } catch (e) {
+      print('Error al capturar o enviar la imagen: $e');
+    }
+  }
+
+  Future<void> initializeCamera() async {
+    cameras = await availableCameras();
     _cameraController = CameraController(
-      cameras[0], // Usa la cámara trasera
-      ResolutionPreset.medium,
+      cameras[selectedCameraIndex],
+      ResolutionPreset.high,
       enableAudio: false,
     );
 
@@ -44,17 +99,29 @@ class _SignToTextScreenState extends State<SignToTextScreen>
     }
   }
 
+  void switchCamera() async {
+    if (cameras.isNotEmpty) {
+      selectedCameraIndex = (selectedCameraIndex + 1) % cameras.length;
+
+      if (_cameraController.value.isInitialized) {
+        await _cameraController.dispose();
+      }
+      initializeCamera();
+    }
+  }
+
   void _initTts() {
-    flutterTts.setLanguage("es-ES");
-    flutterTts.setPitch(1.0);
-    flutterTts.setSpeechRate(0.5);
+    flutterTts.setLanguage("es-ES"); // Idioma español
+    flutterTts.setPitch(1.0); // Tono normal
+    flutterTts.setSpeechRate(0.5); // Velocidad de lectura moderada
   }
 
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _cameraController.dispose();
-    flutterTts.stop();
+    flutterTts.stop(); // Detener la reproducción de voz
+    _captureTimer?.cancel(); // Cancelar el timer al cerrar la app
     super.dispose();
   }
 
@@ -68,24 +135,33 @@ class _SignToTextScreenState extends State<SignToTextScreen>
     }
   }
 
-  void translateSignLanguage() {
-    // Simula el texto traducido desde lenguaje de señas.
-    setState(() {
-      translatedText = "Texto traducido desde lenguaje de señas";
-    });
-  }
-
-  void clearText() {
-    setState(() {
-      translatedText = "";
-    });
-  }
-
-  void saveText() {
-    // Implementa la lógica para guardar el texto traducido.
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Texto guardado: $translatedText")),
+  Widget _rearCameraView() {
+    // Lógica específica para la cámara trasera
+    return Transform.rotate(
+      angle: math.pi / 2, // Rotación de 90 grados
+      child: CameraPreview(_cameraController),
     );
+  }
+
+  Widget _frontCameraView() {
+    // Lógica específica para la cámara frontal
+    return Transform(
+      alignment: Alignment.center,
+      transform: Matrix4.rotationY(math.pi), // Efecto espejo
+      child: Transform.rotate(
+        angle: -math.pi /
+            2, // Ajuste para que la cámara frontal quede correctamente orientada
+        child: CameraPreview(_cameraController),
+      ),
+    );
+  }
+
+  Widget _cameraView() {
+    // Seleccionar la vista dependiendo de la cámara
+    return cameras[selectedCameraIndex].lensDirection ==
+            CameraLensDirection.front
+        ? _frontCameraView()
+        : _rearCameraView();
   }
 
   void speakText() {
@@ -94,12 +170,23 @@ class _SignToTextScreenState extends State<SignToTextScreen>
     }
   }
 
+  void saveTranslation() {
+    // Lógica para guardar la traducción (implementar según sea necesario)
+    print("Guardado: $translatedText");
+  }
+
+  void clearTranslation() {
+    setState(() {
+      translatedText = "";
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Nuevo Traductor IA', // Cambia el texto aquí
+          'Nuevo Traductor IA',
           style: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
         ),
@@ -113,31 +200,15 @@ class _SignToTextScreenState extends State<SignToTextScreen>
       ),
       body: Column(
         children: [
-          // Vista de la cámara ajustada para orientación vertical con borde
-          Expanded(
-            flex: 3,
+          // Vista de la cámara con tamaño fijo
+          SizedBox(
+            height: 370, // Altura fija
+            width: 350, // Ancho fijo
             child: isCameraInitialized
                 ? Padding(
-                    padding: const EdgeInsets.all(
-                        3.0), // Borde alrededor de la cámara
+                    padding: const EdgeInsets.all(3.0),
                     child: ClipRect(
-                      child: Transform.rotate(
-                        angle:
-                            90 * (3.1415926535897932 / 180), // Rotar 90 grados
-                        child: OverflowBox(
-                          alignment: Alignment.center,
-                          child: FittedBox(
-                            fit: BoxFit.contain,
-                            child: SizedBox(
-                              width:
-                                  300, // Cambia este valor para ajustar el ancho
-                              height:
-                                  250, // Cambia este valor para ajustar el alto
-                              child: CameraPreview(_cameraController),
-                            ),
-                          ),
-                        ),
-                      ),
+                      child: _cameraView(), // Selecciona la vista correcta
                     ),
                   )
                 : Center(
@@ -148,7 +219,56 @@ class _SignToTextScreenState extends State<SignToTextScreen>
                     ),
                   ),
           ),
-          // Campo de texto para la traducción
+          // Switch para detección y botón para cambiar cámara en una misma fila
+          Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0), // Menor padding para alejar de los bordes
+            child: Row(
+              children: [
+                // Switch con texto "Detectar"
+                Expanded(
+                  flex:
+                      2, // Aumentado ligeramente para dar espacio pero no tanto como antes
+                  child: Row(
+                    children: [
+                      Text(
+                        "Detectar",
+                        style: TextStyle(color: NowUIColors.text),
+                      ),
+                      Switch.adaptive(
+                        value: switchValueOne,
+                        onChanged: (bool newValue) =>
+                            setState(() => switchValueOne = newValue),
+                        activeColor: NowUIColors.primary,
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Espacio entre el Switch y el Botón
+                SizedBox(
+                    width:
+                        20), // Aumentamos la separación para que no estén tan pegados
+
+                // Botón para cambiar la cámara
+                Expanded(
+                  flex:
+                      3, // Reducido para que no se extienda tanto hacia el borde derecho
+                  child: ElevatedButton.icon(
+                    onPressed: switchCamera,
+                    icon: Icon(Icons.switch_camera),
+                    label: Text('Cambiar cámara'),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize:
+                          Size(20, 40), // El ancho del botón se ajusta aquí
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Campo de texto para traducción
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -172,41 +292,36 @@ class _SignToTextScreenState extends State<SignToTextScreen>
                   controller: TextEditingController(text: translatedText),
                 ),
                 SizedBox(height: 16),
+                // Botón de reproducir
                 SizedBox(
-                  width: double
-                      .infinity, // Hacer que el botón ocupe todo el ancho disponible
+                  width: double.infinity,
                   child: FloatingActionButton.extended(
-                    onPressed: speakText,
+                    onPressed:
+                        speakText, // Llama a la función cuando se presiona
                     label: Text('Reproducir'),
-                    icon: Icon(Icons
-                        .play_arrow), // Cambiar el ícono a un reproductor de audio
+                    icon: Icon(Icons.volume_up_rounded),
+                    backgroundColor: Colors.blueAccent,
                   ),
+                ),
+                SizedBox(height: 16),
+
+                // Botones de guardar y limpiar
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      onPressed: saveTranslation,
+                      child: Text('Guardar'),
+                    ),
+                    ElevatedButton(
+                      onPressed: clearTranslation,
+                      child: Text('Limpiar'),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
-          // Botones
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ElevatedButton(
-                  onPressed: saveText,
-                  child: Text('Guardar'),
-                ),
-                ElevatedButton(
-                  onPressed: clearText,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    iconColor: Colors.white,
-                  ),
-                  child: Text('Limpiar'),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 16),
         ],
       ),
     );

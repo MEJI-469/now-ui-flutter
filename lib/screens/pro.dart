@@ -5,11 +5,13 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:now_ui_flutter/constants/Theme.dart';
 
 class Pro extends StatelessWidget {
-  _launchURL() async {
-    final Uri _url = Uri.parse('https://creative-tim.com');
+  const Pro({Key? key}) : super(key: key);
 
-    if (!await launchUrl(_url)) {
-      throw 'No se pudo lanzar $_url';
+  _launchURL() async {
+    final Uri url = Uri.parse('https://creative-tim.com');
+
+    if (!await launchUrl(url)) {
+      throw 'No se pudo lanzar $url';
     }
   }
 
@@ -51,7 +53,7 @@ class Pro extends StatelessWidget {
                       child: Center(
                           child: Column(
                     children: [
-                      Container(
+                      SizedBox(
                           width: MediaQuery.of(context).size.width / 1.5,
                           child: FittedBox(
                               fit: BoxFit.contain,
@@ -59,7 +61,7 @@ class Pro extends StatelessWidget {
                                   style: TextStyle(
                                       color: NowUIColors.white,
                                       fontWeight: FontWeight.w600)))),
-                      Container(
+                      SizedBox(
                           width: MediaQuery.of(context).size.width / 1.5,
                           child: FittedBox(
                             fit: BoxFit.contain,
