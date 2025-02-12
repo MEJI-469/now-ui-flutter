@@ -5,15 +5,13 @@ import 'dart:math' as math;
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
-import 'dart:async'; // Importar para usar Timer
+import 'dart:async';
 import '../constants/Theme.dart';
 
 Timer? _captureTimer;
 late bool switchValueOne;
 
 class SignToTextScreen extends StatefulWidget {
-  //const SignToTextScreen({super.key});
-
   @override
   _SignToTextScreenState createState() => _SignToTextScreenState();
 }
@@ -34,8 +32,9 @@ class _SignToTextScreenState extends State<SignToTextScreen>
     initializeCamera();
     switchValueOne = false;
     _initTts();
+  }
 
-    // Iniciar el timer para capturar imágenes cada 2 segundos
+  void startDetection() {
     _captureTimer = Timer.periodic(Duration(seconds: 2), (timer) {
       if (isCameraInitialized) {
         captureAndSendImage();
@@ -43,24 +42,23 @@ class _SignToTextScreenState extends State<SignToTextScreen>
     });
   }
 
-  // Método para capturar imagen, convertirla a base64 y enviar al servidor
+  void stopDetection() {
+    _captureTimer?.cancel();
+    _captureTimer = null;
+  }
+
   Future<void> captureAndSendImage() async {
     if (!_cameraController.value.isInitialized) return;
 
     try {
-      // Capturar la imagen
       final XFile imageFile = await _cameraController.takePicture();
       final bytes = await imageFile.readAsBytes();
 
-      // Convertir la imagen a base64
       String base64Image = base64Encode(bytes);
-      base64Image =
-          'data:image/jpeg;base64,$base64Image'; // Asegúrate de que el formato coincide con el del backend
+      base64Image = 'data:image/jpeg;base64,$base64Image';
 
-      // Enviar la imagen al backend
       final response = await http.post(
-        Uri.parse(
-            'http://192.168.52.17:5000/predict'), // Cambia esto por tu IP local si estás usando un dispositivo físico
+        Uri.parse('http://192.168.52.17:5000/predict'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'image': base64Image}),
       );
@@ -68,8 +66,7 @@ class _SignToTextScreenState extends State<SignToTextScreen>
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         setState(() {
-          translatedText +=
-              data['prediction']; // Añadir la letra detectada al campo de texto
+          translatedText += data['prediction'];
         });
       } else {
         print('Error en la predicción: ${response.body}');
@@ -111,17 +108,17 @@ class _SignToTextScreenState extends State<SignToTextScreen>
   }
 
   void _initTts() {
-    flutterTts.setLanguage("es-ES"); // Idioma español
-    flutterTts.setPitch(1.0); // Tono normal
-    flutterTts.setSpeechRate(0.5); // Velocidad de lectura moderada
+    flutterTts.setLanguage("es-ES");
+    flutterTts.setPitch(1.0);
+    flutterTts.setSpeechRate(0.5);
   }
 
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _cameraController.dispose();
-    flutterTts.stop(); // Detener la reproducción de voz
-    _captureTimer?.cancel(); // Cancelar el timer al cerrar la app
+    flutterTts.stop();
+    stopDetection();
     super.dispose();
   }
 
@@ -136,28 +133,24 @@ class _SignToTextScreenState extends State<SignToTextScreen>
   }
 
   Widget _rearCameraView() {
-    // Lógica específica para la cámara trasera
     return Transform.rotate(
-      angle: math.pi / 2, // Rotación de 90 grados
+      angle: math.pi / 2,
       child: CameraPreview(_cameraController),
     );
   }
 
   Widget _frontCameraView() {
-    // Lógica específica para la cámara frontal
     return Transform(
       alignment: Alignment.center,
-      transform: Matrix4.rotationY(math.pi), // Efecto espejo
+      transform: Matrix4.rotationY(math.pi),
       child: Transform.rotate(
-        angle: -math.pi /
-            2, // Ajuste para que la cámara frontal quede correctamente orientada
+        angle: -math.pi / 2,
         child: CameraPreview(_cameraController),
       ),
     );
   }
 
   Widget _cameraView() {
-    // Seleccionar la vista dependiendo de la cámara
     return cameras[selectedCameraIndex].lensDirection ==
             CameraLensDirection.front
         ? _frontCameraView()
@@ -171,7 +164,6 @@ class _SignToTextScreenState extends State<SignToTextScreen>
   }
 
   void saveTranslation() {
-    // Lógica para guardar la traducción (implementar según sea necesario)
     print("Guardado: $translatedText");
   }
 
@@ -200,15 +192,14 @@ class _SignToTextScreenState extends State<SignToTextScreen>
       ),
       body: Column(
         children: [
-          // Vista de la cámara con tamaño fijo
           SizedBox(
-            height: 370, // Altura fija
-            width: 350, // Ancho fijo
+            height: 370,
+            width: 350,
             child: isCameraInitialized
                 ? Padding(
                     padding: const EdgeInsets.all(3.0),
                     child: ClipRect(
-                      child: _cameraView(), // Selecciona la vista correcta
+                      child: _cameraView(),
                     ),
                   )
                 : Center(
@@ -219,17 +210,13 @@ class _SignToTextScreenState extends State<SignToTextScreen>
                     ),
                   ),
           ),
-          // Switch para detección y botón para cambiar cámara en una misma fila
           Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 8.0), // Menor padding para alejar de los bordes
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: Row(
               children: [
-                // Switch con texto "Detectar"
                 Expanded(
-                  flex:
-                      2, // Aumentado ligeramente para dar espacio pero no tanto como antes
+                  flex: 2,
                   child: Row(
                     children: [
                       Text(
@@ -238,37 +225,36 @@ class _SignToTextScreenState extends State<SignToTextScreen>
                       ),
                       Switch.adaptive(
                         value: switchValueOne,
-                        onChanged: (bool newValue) =>
-                            setState(() => switchValueOne = newValue),
+                        onChanged: (bool newValue) {
+                          setState(() {
+                            switchValueOne = newValue;
+                            if (newValue) {
+                              startDetection();
+                            } else {
+                              stopDetection();
+                            }
+                          });
+                        },
                         activeColor: NowUIColors.primary,
                       ),
                     ],
                   ),
                 ),
-
-                // Espacio entre el Switch y el Botón
-                SizedBox(
-                    width:
-                        20), // Aumentamos la separación para que no estén tan pegados
-
-                // Botón para cambiar la cámara
+                SizedBox(width: 15),
                 Expanded(
-                  flex:
-                      3, // Reducido para que no se extienda tanto hacia el borde derecho
+                  flex: 3,
                   child: ElevatedButton.icon(
                     onPressed: switchCamera,
                     icon: Icon(Icons.switch_camera),
                     label: Text('Cambiar cámara'),
                     style: ElevatedButton.styleFrom(
-                      minimumSize:
-                          Size(20, 40), // El ancho del botón se ajusta aquí
+                      minimumSize: Size(20, 40),
                     ),
                   ),
                 ),
               ],
             ),
           ),
-          // Campo de texto para traducción
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -292,20 +278,16 @@ class _SignToTextScreenState extends State<SignToTextScreen>
                   controller: TextEditingController(text: translatedText),
                 ),
                 SizedBox(height: 16),
-                // Botón de reproducir
                 SizedBox(
                   width: double.infinity,
                   child: FloatingActionButton.extended(
-                    onPressed:
-                        speakText, // Llama a la función cuando se presiona
+                    onPressed: speakText,
                     label: Text('Reproducir'),
                     icon: Icon(Icons.volume_up_rounded),
                     backgroundColor: Colors.blueAccent,
                   ),
                 ),
                 SizedBox(height: 16),
-
-                // Botones de guardar y limpiar
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
