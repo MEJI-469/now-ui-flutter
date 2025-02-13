@@ -150,6 +150,44 @@ class AlphabetScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
+              //Inicia boton Colores
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SingsScreen(contentType: 'colors'),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.all(20),
+                    textStyle: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    )),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: const [
+                        Icon(
+                          Icons.color_lens,
+                          size: 40,
+                        ),
+                        SizedBox(width: 20),
+                        Text('Colores'),
+                      ],
+                    ),
+                    const Icon(
+                      Icons.arrow_forward,
+                      size: 30,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
             ],
           ),
         )),

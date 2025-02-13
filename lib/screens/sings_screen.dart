@@ -12,21 +12,41 @@ class SingsScreen extends StatefulWidget {
 
 class _SingsScreenState extends State<SingsScreen> {
   List<Map<String, String>> currentContent = [];
-  final List<String> alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+  final List<String> alphabet = 'abcchdefghijklmnopqrstuvwxyz'.split('');
   final List<String> numbers = '0123456789'.split('');
   final List<String> months = [
-    'january',
-    'february',
-    'march',
-    'april',
-    'may',
-    'june',
-    'july',
-    'august',
-    'september',
-    'october',
-    'november',
-    'december'
+    'enero',
+    'febrero',
+    'marzo',
+    'abril',
+    'mayo',
+    'junio',
+    'julio',
+    'agosto',
+    'septiembre',
+    'octubre',
+    'noviembre',
+    'diciembre'
+  ];
+  final List<String> colors = [
+    'amarillo',
+    'anaranjado',
+    'azul',
+    'blanco',
+    'brillante',
+    'cafe',
+    'claro',
+    'color',
+    'gris',
+    'morado',
+    'negro',
+    'oro',
+    'oscuro',
+    'plata',
+    'rojo_oscuro',
+    'rojo',
+    'rosa',
+    'verde'
   ];
 
   @override
@@ -49,8 +69,18 @@ class _SingsScreenState extends State<SingsScreen> {
         break;
       case 'months':
         currentContent = months
-            .map((month) =>
-                {'image': 'assets/sign/$month.png', 'text': month.capitalize()})
+            .map((month) => {
+                  'image': 'assets/months/$month.png',
+                  'text': month.capitalize()
+                })
+            .toList();
+        break;
+      case 'colors':
+        currentContent = colors
+            .map((color) => {
+                  'image': 'assets/colors/$color.png',
+                  'text': color.capitalize()
+                })
             .toList();
         break;
       default:
