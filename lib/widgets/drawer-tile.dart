@@ -9,12 +9,12 @@ class DrawerTile extends StatelessWidget {
   final bool isSelected;
   final Color iconColor;
 
-  DrawerTile(
-      {required this.title,
+  const DrawerTile(
+      {Key? key, required this.title,
       required this.icon,
       required this.onTap,
       this.isSelected = false,
-      this.iconColor = NowUIColors.text});
+      this.iconColor = NowUIColors.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

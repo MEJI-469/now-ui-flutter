@@ -12,6 +12,8 @@ import 'package:now_ui_flutter/widgets/input.dart';
 import 'package:now_ui_flutter/widgets/drawer.dart';
 
 class ScreenTemplates extends StatelessWidget {
+  const ScreenTemplates({Key? key}) : super(key: key);
+
   //final String title;
 
   //const ScreenTemplates({Key? key, required this.title}) : super(key: key);

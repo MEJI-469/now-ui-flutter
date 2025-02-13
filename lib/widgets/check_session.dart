@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Importa también las pantallas que ya existen en tu Proyecto1
-import 'package:now_ui_flutter/screens/onboarding.dart';
-import 'package:now_ui_flutter/screens/pro.dart';
-import 'package:now_ui_flutter/screens/home.dart';
-import 'package:now_ui_flutter/screens/profile.dart';
 // ... y así con todas las que necesites
 
 class CheckSession extends StatelessWidget {

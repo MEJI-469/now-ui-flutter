@@ -273,6 +273,8 @@ import 'package:now_ui_flutter/widgets/dialog_utils.dart';
 // Asegúrate de ajustarlo a la ruta real donde lo pusiste
 
 class Settings extends StatefulWidget {
+  const Settings({Key? key}) : super(key: key);
+
   @override
   _SettingsState createState() => _SettingsState();
 }

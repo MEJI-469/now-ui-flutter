@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:now_ui_flutter/constants/Theme.dart';
 
 class CardSquare extends StatelessWidget {
-  CardSquare({
+  const CardSquare({Key? key, 
     this.title = "Placeholder Title",
     this.cta = "",
     this.img = "https://via.placeholder.com/200",
     required this.tap,
-  });
+  }) : super(key: key);
 
   final String cta;
   final String img;
@@ -20,7 +20,7 @@ class CardSquare extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         height: 250,
         width: null,
         child: GestureDetector(

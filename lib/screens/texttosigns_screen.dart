@@ -6,6 +6,8 @@ import '../models/historial_traduccion.dart';
 import '../services/historial_traduccion_service.dart';
 
 class TextToSignScreen extends StatefulWidget {
+  const TextToSignScreen({Key? key}) : super(key: key);
+
   @override
   _TextToSignScreenState createState() => _TextToSignScreenState();
 }

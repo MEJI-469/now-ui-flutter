@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:now_ui_flutter/constants/Theme.dart';
 
 class CardHorizontal extends StatelessWidget {
-  CardHorizontal(
-      {this.title = "Placeholder Title",
+  const CardHorizontal(
+      {Key? key, this.title = "Placeholder Title",
       this.cta = "",
       this.img = "https://via.placeholder.com/200",
-      this.tap = defaultFunc});
+      this.tap = defaultFunc}) : super(key: key);
 
   final String cta;
   final String img;
@@ -19,7 +19,7 @@ class CardHorizontal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         height: 130,
         child: GestureDetector(
           onTap: tap,

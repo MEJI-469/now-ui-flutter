@@ -32,11 +32,13 @@ final Map<String, Map<String, String>> homeCards = {
 };
 
 class Soporte extends StatelessWidget {
-  void _launchURL(String link) async {
-    final Uri _url = Uri.parse(link);
+  const Soporte({Key? key}) : super(key: key);
 
-    if (!await launchUrl(_url)) {
-      throw 'No se pudo lanzar $_url';
+  void _launchURL(String link) async {
+    final Uri url = Uri.parse(link);
+
+    if (!await launchUrl(url)) {
+      throw 'No se pudo lanzar $url';
     }
   }
 

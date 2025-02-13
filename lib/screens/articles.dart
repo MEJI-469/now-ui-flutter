@@ -87,6 +87,8 @@ final Map<String, Map<String, dynamic>> articlesCards = {
 };
 
 class Articles extends StatelessWidget {
+  const Articles({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

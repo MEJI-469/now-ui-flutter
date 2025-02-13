@@ -347,6 +347,8 @@ import 'package:now_ui_flutter/widgets/drawer.dart';
 import 'package:now_ui_flutter/widgets/photo-album.dart';
 
 class Profile extends StatefulWidget {
+  const Profile({Key? key}) : super(key: key);
+
   @override
   _ProfileState createState() => _ProfileState();
 }

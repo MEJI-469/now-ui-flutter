@@ -37,6 +37,8 @@ final Map<String, Map<String, String>> homeCards = {
 };
 
 class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
   // final GlobalKey _scaffoldKey = new GlobalKey();
   @override
   Widget build(BuildContext context) {

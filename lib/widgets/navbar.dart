@@ -28,7 +28,7 @@ class Navbar extends StatefulWidget implements PreferredSizeWidget {
   final bool noShadow;
   final Color bgColor;
 
-  Navbar({
+  const Navbar({Key? key, 
     this.title = "Home",
     this.categoryOne = "",
     this.categoryTwo = "",
@@ -45,7 +45,7 @@ class Navbar extends StatefulWidget implements PreferredSizeWidget {
     this.noShadow = false,
     this.bgColor = NowUIColors.white,
     this.searchBar = false,
-  });
+  }) : super(key: key);
 
   final double _prefferedHeight = 180.0;
 
@@ -59,10 +59,11 @@ class Navbar extends StatefulWidget implements PreferredSizeWidget {
 class _NavbarState extends State<Navbar> {
   late String activeTag;
 
-  ItemScrollController _scrollController = ItemScrollController();
+  final ItemScrollController _scrollController = ItemScrollController();
 
+  @override
   void initState() {
-    if (widget.tags != null && widget.tags.length != 0) {
+    if (widget.tags.isNotEmpty) {
       activeTag = widget.tags[0];
     }
     super.initState();
@@ -73,7 +74,7 @@ class _NavbarState extends State<Navbar> {
     final bool categories =
         widget.categoryOne.isNotEmpty && widget.categoryTwo.isNotEmpty;
     final bool tagsExist =
-        widget.tags == null ? false : (widget.tags.length == 0 ? false : true);
+        widget.tags == null ? false : (widget.tags.isEmpty ? false : true);
 
     return Container(
         height: widget.searchBar
@@ -119,10 +120,11 @@ class _NavbarState extends State<Navbar> {
                                         : NowUIColors.white),
                                 size: 24.0),
                             onPressed: () {
-                              if (!widget.backButton)
+                              if (!widget.backButton) {
                                 Scaffold.of(context).openDrawer();
-                              else
+                              } else {
                                 Navigator.pop(context);
+                              }
                             }),
                         Text(widget.title,
                             style: TextStyle(
@@ -260,7 +262,7 @@ class _NavbarState extends State<Navbar> {
                     ],
                   ),
                 if (tagsExist)
-                  Container(
+                  SizedBox(
                     height: 40,
                     child: ScrollablePositionedList.builder(
                       itemScrollController: _scrollController,
@@ -276,8 +278,7 @@ class _NavbarState extends State<Navbar> {
                                       index == widget.tags.length - 1 ? 1 : 0,
                                   duration: Duration(milliseconds: 420),
                                   curve: Curves.easeIn);
-                              if (widget.getCurrentPage != null)
-                                widget.getCurrentPage(activeTag);
+                              widget.getCurrentPage(activeTag);
                             }
                           },
                           child: Container(
