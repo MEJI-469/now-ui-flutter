@@ -58,7 +58,7 @@ class _SignToTextScreenState extends State<SignToTextScreen>
       base64Image = 'data:image/jpeg;base64,$base64Image';
 
       final response = await http.post(
-        Uri.parse('http://192.168.52.17:5000/predict'),
+        Uri.parse('http://192.168.3.11:5000/predict'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'image': base64Image}),
       );

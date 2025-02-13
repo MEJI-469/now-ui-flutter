@@ -5,6 +5,7 @@ import 'package:now_ui_flutter/constants/Theme.dart';
 //widgets
 import 'package:now_ui_flutter/widgets/navbar.dart';
 import 'package:now_ui_flutter/widgets/drawer.dart';
+import 'package:now_ui_flutter/screens/sings_screen.dart';
 
 class AlphabetScreen extends StatelessWidget {
   final String title;
@@ -37,7 +38,13 @@ class AlphabetScreen extends StatelessWidget {
               //Inicia boton letras
               ElevatedButton(
                 onPressed: () {
-                  print("Boton ' Abecedario' presionado");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          SingsScreen(contentType: 'alphabet'),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.all(20),
@@ -70,7 +77,12 @@ class AlphabetScreen extends StatelessWidget {
               //Inicia boton numeros
               ElevatedButton(
                 onPressed: () {
-                  print("Boton ' Abecedario' presionado");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SingsScreen(contentType: 'numbers'),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.all(20),
@@ -103,7 +115,12 @@ class AlphabetScreen extends StatelessWidget {
               //Inicia boton Meses
               ElevatedButton(
                 onPressed: () {
-                  print("Boton ' Meses' presionado");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SingsScreen(contentType: 'months'),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.all(20),
