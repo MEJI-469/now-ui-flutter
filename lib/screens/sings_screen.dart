@@ -12,7 +12,38 @@ class SingsScreen extends StatefulWidget {
 
 class _SingsScreenState extends State<SingsScreen> {
   List<Map<String, String>> currentContent = [];
-  final List<String> alphabet = 'abcchdefghijklmnopqrstuvwxyz'.split('');
+  final List<String> alphabet = [
+    'a',
+    'b',
+    'c',
+    'ch',
+    'd',
+    'e',
+    'f',
+    'g',
+    'h',
+    'i',
+    'j',
+    'k',
+    'l',
+    'll',
+    'm',
+    'n',
+    'ñ',
+    'o',
+    'p',
+    'q',
+    'r',
+    'rr',
+    's',
+    't',
+    'u',
+    'v',
+    'w',
+    'x',
+    'y',
+    'z'
+  ];
   final List<String> numbers = '0123456789'.split('');
   final List<String> months = [
     'enero',
