@@ -22,12 +22,15 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
-  List<CargarTraduccion> _historial = [];
+  List<CargarTraduccion> _allHistorial = []; // Historial completo
+  List<CargarTraduccion> _filteredHistorial = []; // Historial filtrado
   bool _isLoading = true;
 
   final bool _checkboxValue = false;
 
   final double height = window.physicalSize.height;
+
+  final TextEditingController _searchCtrl = TextEditingController();
 
   @override
   void initState() {
@@ -46,7 +49,8 @@ class _HistoryState extends State<History> {
         final historial = await HistorialTraduccionService()
             .obtenerHistorialPorUsuario(userId);
         setState(() {
-          _historial = historial;
+          _allHistorial = historial;
+          _filteredHistorial = historial; // al inicio, sin filtro
           _isLoading = false;
         });
       } else {
@@ -69,43 +73,47 @@ class _HistoryState extends State<History> {
     }
   }
 
+  void _filterByDate(String query) {
+    print("Buscando: $query"); // debug
+    setState(() {
+      // Si el usuario borró todo y la query es vacía, mostramos todo:
+      if (query.isEmpty) {
+        _filteredHistorial = _allHistorial;
+      } else {
+        final lowerQuery = query.toLowerCase();
+        _filteredHistorial = _allHistorial.where((item) {
+          return item.fechaTraduccion.toLowerCase().contains(lowerQuery);
+          print("Buscando: $query"); // debug
+        }).toList();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: /*Navbar(
-        title: "Historial",
-        reverseTextcolor: true,
-        tags: [], // List<String> obligatorio
-        getCurrentPage: () => 0, // o alguna lógica que retorne un int
-        searchController: TextEditingController(),
-        searchOnChanged: (text) {
-          // tu lógica
-        },
-      ),*/
-          Navbar(
+      appBar: Navbar(
         title: "Historial",
         searchBar: true,
         backButton: true,
         tags: [], // List<String>
         getCurrentPage: () => 1, // Una función que retorne int
-        searchController: TextEditingController(),
+        searchController: _searchCtrl,
         searchOnChanged: (text) {
-          // Lógica al cambiar texto
+          _filterByDate(text);
         },
       ),
       backgroundColor: NowUIColors.bgColorScreen,
-      extendBodyBehindAppBar: true,
-      drawer: NowDrawer(currentPage: "History"),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : _historial.isEmpty
+          : _filteredHistorial.isEmpty
               ? const Center(child: Text("No hay traducciones registradas"))
               : Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: ListView.builder(
-                    itemCount: _historial.length,
+                    itemCount: _filteredHistorial.length,
                     itemBuilder: (context, index) {
-                      final traduccion = _historial[index];
+                      final traduccion = _filteredHistorial[index];
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 20.0),
                         child: Container(

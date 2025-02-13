@@ -7,7 +7,7 @@ import 'package:now_ui_flutter/screens/onboarding.dart';
 import 'package:now_ui_flutter/screens/pro.dart';
 import 'package:now_ui_flutter/screens/home.dart';
 import 'package:now_ui_flutter/screens/profile.dart';
-import 'package:now_ui_flutter/screens/settings.dart';
+import 'package:now_ui_flutter/screens/settings.dart';  
 import 'package:now_ui_flutter/screens/register.dart';
 import 'package:now_ui_flutter/screens/articles.dart';
 import 'package:now_ui_flutter/screens/components.dart';
@@ -19,6 +19,7 @@ import 'package:now_ui_flutter/screens/signstotext_screen.dart';
 import 'package:now_ui_flutter/screens/texttosigns_screen.dart';
 import 'package:now_ui_flutter/screens/screen-templates.dart';
 import 'package:now_ui_flutter/screens/soporte.dart';
+import 'package:now_ui_flutter/screens/edit_profile.dart';
 
 // <-- Asegúrate de importar tu nuevo CheckSession
 import 'package:now_ui_flutter/widgets/check_session.dart'; // donde definiste la clase
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
         "/texttosing": (BuildContext context) => TextToSignScreen(),
         "/screens": (BuildContext context) => ScreenTemplates(),
         "/soporte": (BuildContext context) => Soporte(),
+        "/edit-profile": (BuildContext context) => EditProfile(),
       },
     );
   }

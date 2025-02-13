@@ -35,6 +35,12 @@ dependencies:
   intl: ^0.18.0
   shared_preferences: ^2.3.5
 
+  # Nuevas dependencias
+  pdf: ^3.11.3        # o la versión más reciente
+  printing: ^5.14.2    # opcional, para previsualizar/imprimir/compartir
+  path_provider: ^2.1.5     # Para guardar/leer archivos en el almacenamiento del dispositivo
+  share_plus: ^10.1.4     # Para compartir archivos (enviar por email, WhatsApp, etc.)
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
@@ -78,6 +84,7 @@ flutter:
     - assets/imgs/juegos-fondo.png
     - assets/imgs/
     - assets/sign/
+    - assets/fonts/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

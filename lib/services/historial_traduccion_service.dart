@@ -69,4 +69,19 @@ class HistorialTraduccionService {
       throw Exception("Error al obtener el historial: ${response.statusCode}");
     }
   }
+
+  // Obtener las traducciones de un ususario por fechas
+  Future<List<CargarTraduccion>> obtenerHistorialPorRango(
+      int userId, String startDate, String endDate) async {
+    final url = Uri.parse(
+        "$baseUrl/historial/usuario/$userId/rango?start=$startDate&end=$endDate");
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> data = jsonDecode(response.body);
+      return data.map((json) => CargarTraduccion.fromJson(json)).toList();
+    } else {
+      throw Exception("Error al obtener el historial: ${response.statusCode}");
+    }
+  }
 }

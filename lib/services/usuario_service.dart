@@ -97,4 +97,47 @@ class UsuarioService {
 
     return response.statusCode == 201; // Devuelve true si se registra con éxito
   }
+
+  // Método para actualizar/editar un usuario
+  static Future<bool> updateUser({
+    required int id,
+    required String usuario,
+    required String password,
+    required String nombre,
+    required int edad,
+    required String telefono,
+    required String correo,
+    required bool carnetDiscapacidad,
+    int? porcentajeDiscapacidad,
+    String? numeroCarnet,
+  }) async {
+    final url = Uri.parse("$_baseUrl/usuario/$id");
+
+    // Armamos el JSON según lo que el backend espera:
+    final body = jsonEncode({
+      "usuario": usuario,
+      "pasword": password,
+      "nombre": nombre,
+      "edad": edad,
+      "telefono": telefono,
+      "correo": correo,
+      "carnet_discapacidad": carnetDiscapacidad,
+      "porcentaje_de_discapacidad": porcentajeDiscapacidad,
+      "numero_carnet": numeroCarnet,
+    });
+
+    final response = await http.put(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: body,
+    );
+
+    print("Respuesta updateUser() -> status: ${response.statusCode}");
+    print("Respuesta updateUser() -> body: ${response.body}");
+
+    // Tu endpoint de @PutMapping usa @ResponseStatus(HttpStatus.CREATED),
+    // lo que significa que usualmente retornará código 201
+    // Podrías chequear 200, 201 o 204 según el caso
+    return (response.statusCode == 201);
+  }
 }

@@ -197,6 +197,7 @@ class _LoginState extends State<Login> {
                                       placeholder: "Contraseña...",
                                       prefixIcon: Icon(Icons.lock, size: 20),
                                       suffixIcon: Icon(Icons.check),
+                                      obscureText: true,
                                       // NUEVO: usa el controller
                                       controller: _passwordController,
                                       // si el widget Input lo permite, podrías agregar obscureText: true

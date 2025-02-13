@@ -28,7 +28,8 @@ class Navbar extends StatefulWidget implements PreferredSizeWidget {
   final bool noShadow;
   final Color bgColor;
 
-  const Navbar({Key? key, 
+  const Navbar({
+    Key? key,
     this.title = "Home",
     this.categoryOne = "",
     this.categoryTwo = "",
@@ -142,46 +143,7 @@ class _NavbarState extends State<Navbar> {
                     if (widget.rightOptions)
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          /*GestureDetector(
-                            onTap: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => Notifications()));
-                            },
-                            child: IconButton(
-                                icon: Icon(Icons.notifications_active,
-                                    color: !widget.transparent
-                                        ? (widget.bgColor == NowUIColors.white
-                                            ? NowUIColors.text
-                                            : NowUIColors.white)
-                                        : (widget.reverseTextcolor
-                                            ? NowUIColors.text
-                                            : NowUIColors.white),
-                                    size: 22.0),
-                                onPressed: null),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => Cart()));
-                            },
-                            child: IconButton(
-                                icon: Icon(Icons.shopping_basket,
-                                    color: !widget.transparent
-                                        ? (widget.bgColor == NowUIColors.white
-                                            ? NowUIColors.text
-                                            : NowUIColors.white)
-                                        : (widget.reverseTextcolor
-                                            ? NowUIColors.text
-                                            : NowUIColors.white),
-                                    size: 22.0),
-                                onPressed: null),
-                          ),*/
-                        ],
+                        children: [],
                       )
                   ],
                 ),
@@ -191,7 +153,7 @@ class _NavbarState extends State<Navbar> {
                         top: 8, bottom: 4, left: 15, right: 15),
                     child: Input(
                         prefixIcon: Icon(Icons.search),
-                        placeholder: "What are you looking for?",
+                        placeholder: "Ejemplo: 2023-10-02",
                         controller: widget.searchController,
                         onChanged: widget.searchOnChanged,
                         autofocus: widget.searchAutofocus,
