@@ -116,7 +116,7 @@ class NowDrawer extends StatelessWidget {
                   iconColor: NowUIColors.success,
                   title: "Ajustes",
                   isSelected: currentPage == "Settings" ? true : false),
-              DrawerTile(
+              /*DrawerTile(
                   icon: FontAwesomeIcons.windows,
                   onTap: () {
                     if (currentPage != "Screens Templates") {
@@ -125,7 +125,7 @@ class NowDrawer extends StatelessWidget {
                   },
                   iconColor: NowUIColors.success,
                   title: "Screen templates",
-                  isSelected: currentPage == "Screens" ? true : false),
+                  isSelected: currentPage == "Screens" ? true : false),*/
             ],
           ),
         ),

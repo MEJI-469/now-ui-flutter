@@ -76,7 +76,8 @@ class TranslationDetails extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.purpleAccent.withOpacity(0.3),
+                              color: const Color.fromARGB(255, 64, 170, 251)
+                                  .withOpacity(0.3),
                               spreadRadius: 10,
                               blurRadius: 5,
                               offset: const Offset(2, 4),

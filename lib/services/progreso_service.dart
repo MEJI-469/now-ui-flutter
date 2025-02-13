@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/progreso.dart';
 
 class ProgresoService {
-  static const String baseUrl = 'http://192.168.18.240:8080/api/progreso';
+  static const String baseUrl = 'http://192.168.52.43:8080/api/progreso';
 
   // Obtener progreso del usuario en un juego
   Future<Progreso?> obtenerProgreso(int usuarioId, int juegoId) async {

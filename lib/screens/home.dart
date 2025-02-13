@@ -31,7 +31,7 @@ final Map<String, Map<String, String>> homeCards = {
         "https://images.unsplash.com/photo-1536686763189-829249e085ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=705&q=80"
   },
   "Argon": {
-    "title": "Juegos diventidos para aprender.",
+    "title": "Juegos divertidos para aprender.",
     "image": "assets/imgs/satoru-gojo.png"
   }
 };

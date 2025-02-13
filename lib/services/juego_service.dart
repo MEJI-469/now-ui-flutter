@@ -5,7 +5,7 @@ import '../models/juego.dart';
 
 class JuegoService {
   final String baseUrl =
-      'http://192.168.18.240:8080/api/juego'; // URL del backend
+      'http://192.168.52.43:8080/api/juego'; // URL del backend
 
   // Método para obtener la lista de juegos desde el backend
   Future<List<Juego>> getJuegos() async {

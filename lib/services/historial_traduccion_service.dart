@@ -5,7 +5,7 @@ import '../models/cargar_traduccion.dart';
 
 class HistorialTraduccionService {
   final String baseUrl =
-      "http://192.168.18.240:8080/api"; // Cambiar la URL según sea necesario
+      "http://192.168.52.43:8080/api"; // Cambiar la URL según sea necesario
 
   // Obtener todo el historial de traducción
   Future<List<HistorialTraduccion>> obtenerHistorial() async {
@@ -13,7 +13,9 @@ class HistorialTraduccionService {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      List<dynamic> data = jsonDecode(response.body);
+      // Decodificar en UTF-8 para que ñ/acentos salgan bien
+      final decodedBody = utf8.decode(response.bodyBytes);
+      final List<dynamic> data = jsonDecode(decodedBody);
       return data.map((json) => HistorialTraduccion.fromJson(json)).toList();
     } else {
       throw Exception("Error al obtener el historial de traducción");
@@ -28,8 +30,7 @@ class HistorialTraduccionService {
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(
-          historial.toJson()), // Usa el formato requerido para guardar
+      body: jsonEncode(historial.toJson()),
     );
 
     print("Estado del guardado: ${response.statusCode}");
@@ -46,20 +47,20 @@ class HistorialTraduccionService {
     return response.statusCode == 204; // Devuelve true si se eliminó con éxito
   }
 
-  // Obtener las traducciones de un ususario
+  // Obtener las traducciones de un usuario
   Future<List<CargarTraduccion>> obtenerHistorialPorUsuario(int userId) async {
     final url = Uri.parse("$baseUrl/historial/usuario/$userId");
     final response = await http.get(url);
 
-    // Agrega un log para imprimir la respuesta completa del backend
+    // Log para imprimir la respuesta
     print("Respuesta completa del backend: ${response.body}");
 
     if (response.statusCode == 200) {
       try {
-        // Decodifica el cuerpo de la respuesta como una lista de objetos
-        final List<dynamic> data = jsonDecode(response.body);
+        // Decodifica en UTF-8
+        final decodedBody = utf8.decode(response.bodyBytes);
+        final List<dynamic> data = jsonDecode(decodedBody);
 
-        // Mapea cada elemento de la lista en un objeto HistorialTraduccion
         return data.map((json) => CargarTraduccion.fromJson(json)).toList();
       } catch (e) {
         print("Error al procesar la respuesta: $e");
@@ -70,7 +71,7 @@ class HistorialTraduccionService {
     }
   }
 
-  // Obtener las traducciones de un ususario por fechas
+  // Obtener las traducciones de un usuario por fechas
   Future<List<CargarTraduccion>> obtenerHistorialPorRango(
       int userId, String startDate, String endDate) async {
     final url = Uri.parse(
@@ -78,7 +79,9 @@ class HistorialTraduccionService {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      final List<dynamic> data = jsonDecode(response.body);
+      // También aquí decodificamos en UTF-8
+      final decodedBody = utf8.decode(response.bodyBytes);
+      final List<dynamic> data = jsonDecode(decodedBody);
       return data.map((json) => CargarTraduccion.fromJson(json)).toList();
     } else {
       throw Exception("Error al obtener el historial: ${response.statusCode}");
