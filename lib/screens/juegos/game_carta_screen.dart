@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../services/progreso_service.dart';
-import '../models/progreso.dart';
+import '../../services/progreso_service.dart';
+import '../../models/progreso.dart';
 
-class GameScreen extends StatefulWidget {
+class GameCartaScreen extends StatefulWidget {
   final int nivel;
   final int juegoId;
   final VoidCallback onLevelComplete;
 
-  const GameScreen(
+  const GameCartaScreen(
       {Key? key,
       required this.nivel,
       required this.juegoId,
@@ -17,10 +17,10 @@ class GameScreen extends StatefulWidget {
       : super(key: key);
 
   @override
-  _GameScreenState createState() => _GameScreenState();
+  _GameCartaScreenState createState() => _GameCartaScreenState();
 }
 
-class _GameScreenState extends State<GameScreen> {
+class _GameCartaScreenState extends State<GameCartaScreen> {
   late List<String> _imagenesCartas;
   late List<bool> _cartasVolteadas;
   int _intentosRestantes = 3;
@@ -52,7 +52,13 @@ class _GameScreenState extends State<GameScreen> {
       'c.png',
       'd.png',
       'e.png',
-      'f.png'
+      'f.png',
+      'g.png',
+      'h.png',
+      'i.png',
+      'j.png',
+      'k.png',
+      'l.png'
     ]; // Señas en assets/sign/
 
     imagenesBase.shuffle(); // Mezcla las imágenes
@@ -119,9 +125,10 @@ class _GameScreenState extends State<GameScreen> {
   void _completarNivel() async {
     if (widget.nivel >= _nivelActual) {
       int nuevoNivel = widget.nivel + 1;
+      int idJuego = widget.juegoId;
       double nuevoProgreso = ((nuevoNivel - 1) / 5) * 100;
       await progresoService.actualizarProgreso(
-          _usuarioId, nuevoNivel, nuevoProgreso);
+          _usuarioId, idJuego, nuevoNivel, nuevoProgreso);
       widget.onLevelComplete();
     }
     _mostrarDialogo("¡Nivel completado!", "Has superado el nivel.");

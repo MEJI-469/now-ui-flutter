@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../services/juego_service.dart'; // Importamos el servicio del backend
-import '../models/juego.dart';
+import '../../services/juego_service.dart'; // Importamos el servicio del backend
+import '../../models/juego.dart';
 import 'levels_screen.dart'; // Importamos la pantalla de niveles
 
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/cargar_traduccion.dart';
-import '../services/historial_traduccion_service.dart';
-import 'translation_details.dart';
+import '../../models/cargar_traduccion.dart';
+import '../../services/historial_traduccion_service.dart';
+import '../translation_details.dart';
 
 import 'dart:ui';
 

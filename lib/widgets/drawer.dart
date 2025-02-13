@@ -37,7 +37,7 @@ class NowDrawer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.baseline,
                   textBaseline: TextBaseline.alphabetic,
                   children: [
-                    Image.asset("assets/imgs/logo_manos.png"),
+                    Image.asset("assets/imgs/logo-of-bw.png"),
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
                       child: IconButton(

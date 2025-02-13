@@ -13,7 +13,7 @@ import 'package:now_ui_flutter/screens/articles.dart';
 import 'package:now_ui_flutter/screens/components.dart';
 import 'package:now_ui_flutter/screens/login.dart';
 import 'package:now_ui_flutter/screens/history.dart';
-import 'package:now_ui_flutter/screens/games_screen.dart';
+import 'package:now_ui_flutter/screens/juegos/games_screen.dart';
 import 'package:now_ui_flutter/screens/alphabet_screen.dart';
 import 'package:now_ui_flutter/screens/signstotext_screen.dart';
 import 'package:now_ui_flutter/screens/texttosigns_screen.dart';

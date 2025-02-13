@@ -6,7 +6,7 @@ class UsuarioService {
   //final String baseUrl = "https://creative-joy-production.up.railway.app/api/usuario/listado";
   //final String baseUrl = "http://192.168.18.240:8080/api/usuario"; // URL para conectar con el móvil localmente
   final String baseUrl =
-      "http://192.168.52.10:8080/api"; // URL para conectar con el móvil localmente
+      "http://192.168.18.240:8080/api"; // URL para conectar con el móvil localmente
 
   // Método para obtener la lista de usuarios
   Future<List<Usuario>> obtenerUsuarios() async {
@@ -60,7 +60,7 @@ class UsuarioService {
 
   // Método para registrar un usuario
   //static const String _baseUrl ="https://creative-joy-production.up.railway.app/api/usuario";
-  static const String _baseUrl = "http://192.168.52.10:8080/api";
+  static const String _baseUrl = "http://192.168.18.240:8080/api";
 
   static Future<bool> registerUser({
     required String usuario,

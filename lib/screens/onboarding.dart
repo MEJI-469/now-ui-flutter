@@ -32,7 +32,7 @@ class Onboarding extends StatelessWidget {
                   // Logo y título
                   Column(
                     children: [
-                      Image.asset("assets/imgs/logo_manos.png", scale: 3.5),
+                      Image.asset("assets/imgs/logo-of.png", scale: 7),
                       SizedBox(height: 20),
                       Container(
                         child: Center(
