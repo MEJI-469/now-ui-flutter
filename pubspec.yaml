@@ -85,6 +85,7 @@ flutter:
     - assets/imgs/
     - assets/sign/
     - assets/fonts/
+    - assets/numbers/
     - assets/colors/
     - assets/months/
 
