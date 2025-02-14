@@ -5,7 +5,7 @@ import '../models/cargar_traduccion.dart';
 
 class HistorialTraduccionService {
   final String baseUrl =
-      "http://192.168.52.43:8080/api"; // Cambiar la URL según sea necesario
+      "http://192.168.52.59:8080/api"; // Cambiar la URL según sea necesario
 
   // Obtener todo el historial de traducción
   Future<List<HistorialTraduccion>> obtenerHistorial() async {

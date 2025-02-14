@@ -6,7 +6,11 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 import 'dart:async';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 import '../constants/Theme.dart';
+import '../models/historial_traduccion.dart';
+import '../services/historial_traduccion_service.dart';
 
 Timer? _captureTimer;
 late bool switchValueOne;
@@ -58,7 +62,7 @@ class _SignToTextScreenState extends State<SignToTextScreen>
       base64Image = 'data:image/jpeg;base64,$base64Image';
 
       final response = await http.post(
-        Uri.parse('http://192.168.3.11:5000/predict'),
+        Uri.parse('http://192.168.52.59:5000/predict'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'image': base64Image}),
       );
@@ -163,8 +167,59 @@ class _SignToTextScreenState extends State<SignToTextScreen>
     }
   }
 
-  void saveTranslation() {
-    print("Guardado: $translatedText");
+  void saveTranslation() async {
+    if (translatedText.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("No hay texto traducido para guardar")),
+      );
+      return;
+    }
+
+    try {
+      // Obtener el id del usuario autenticado
+      final prefs = await SharedPreferences.getInstance();
+      final userId = prefs.getInt(
+          'userId'); // Supongo que guardaste el ID del usuario como 'userId'
+
+      if (userId == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text("Error: No se encontró la sesión del usuario")),
+        );
+        return;
+      }
+
+      // Obtener la fecha actual
+      final fechaActual = DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+      // Crear un objeto de tipo HistorialTraduccion
+      final nuevoHistorial = HistorialTraduccion(
+        // El ID será generado por el backend
+        usuarioId: userId,
+        texto: translatedText,
+        tipoTraduccion: "Señas a texto",
+        fechaTraduccion: fechaActual,
+      );
+
+      // Guardar en el backend
+      final success =
+          await HistorialTraduccionService().crearHistorial(nuevoHistorial);
+
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Traducción guardada con éxito")),
+        );
+        clearTranslation();
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Error al guardar la traducción")),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Error al conectar con el servidor: $e")),
+      );
+    }
   }
 
   void clearTranslation() {

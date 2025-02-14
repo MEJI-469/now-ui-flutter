@@ -15,19 +15,19 @@ final Map<String, Map<String, String>> homeCards = {
     "title": "Contactenos por Facebook",
     "image":
         "https://th.bing.com/th/id/OIP.MHNWAEjX95uG3maQoGtZzAHaHa?rs=1&pid=ImgDetMain",
-    "url": "https://facebook.com",
+    "url": "https://www.facebook.com/TecAzuay",
   },
   "Instagram": {
     "title": "Contactenos por Instagram",
     "image":
         "https://static.vecteezy.com/system/resources/previews/017/743/718/original/instagram-icon-logo-free-png.png",
-    "url": "https://instagram.com", // EJEMPLO
+    "url": "https://www.instagram.com/tecdelazuay/?hl=es-la", // EJEMPLO
   },
   "WhatsApp": {
     "title": "Contactenos por WhatsApp",
     "image":
         "https://th.bing.com/th/id/OIP.XLR5b123Km1O24np1HU7_gHaHa?rs=1&pid=ImgDetMain",
-    "url": "https://wa.me/0984037422", // EJEMPLO WhatsApp con un número
+    "url": "https://wa.me/0995363076", // EJEMPLO WhatsApp con un número
   },
 };
 
