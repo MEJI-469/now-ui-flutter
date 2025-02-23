@@ -26,6 +26,7 @@ final Map<String, Map<String, dynamic>> articlesCards = {
         "title": "Derek Vergara",
         "description": "Scrum Master, Desarrollador y Tester",
         "price": "\©",
+        "url": "https://wa.me/+593 96 887 5491",
       },
       {
         "img":
@@ -33,6 +34,7 @@ final Map<String, Map<String, dynamic>> articlesCards = {
         "title": "Bryam Escobar",
         "description": "Desarrollador y Tester",
         "price": "\©",
+        "url": "https://wa.me/+593 96 326 8696",
       },
       {
         "img":
@@ -40,6 +42,7 @@ final Map<String, Map<String, dynamic>> articlesCards = {
         "title": "Marlon Marca",
         "description": "Desarrollador y Tester",
         "price": "\©",
+        "url": "https://wa.me/+593 98 403 7422",
       },
       {
         "img":
@@ -47,6 +50,7 @@ final Map<String, Map<String, dynamic>> articlesCards = {
         "title": "Eduardo Cajeca",
         "description": "Desarrollador y Tester",
         "price": "\©",
+        "url": "https://wa.me/+593 98 104 9052",
       },
       {
         "img":
@@ -54,6 +58,7 @@ final Map<String, Map<String, dynamic>> articlesCards = {
         "title": "Mauricio Parra",
         "description": "Ducumentacion",
         "price": "\©",
+        "url": "https://wa.me/+593 99 904 0548",
       },
     ],
   }
@@ -114,7 +119,7 @@ class Developers extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: NowUIColors.primary,
+              color: const Color.fromARGB(255, 176, 237, 255),
             ),
           ),
           SafeArea(
@@ -151,7 +156,7 @@ class Developers extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 8.0),
                               child: Text(
-                                "Desarrolladores que contribuyeron con el desarrollo y creación de la aplicacion",
+                                "Desarrolladores que contribuyeron con el desarrollo y creación de la aplicación.",
                                 style: TextStyle(
                                   color:
                                       const Color.fromARGB(255, 106, 106, 106),

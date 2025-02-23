@@ -30,6 +30,7 @@ class _SettingsState extends State<Settings> {
   void _logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isLoggedIn', false);
+    await prefs.clear(); // elimina TODOS los datos
     Navigator.pushReplacementNamed(context, '/onboarding');
   }
 

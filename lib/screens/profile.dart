@@ -104,6 +104,15 @@ class _ProfileState extends State<Profile> {
                                     fontWeight: FontWeight.w800,
                                     fontSize: 28, // un poco más grande
                                     // fontFamily: 'KidFont', // Si agregas una fuente para niños
+                                    shadows: [
+                                      Shadow(
+                                        blurRadius: 3.0,
+                                        color: const Color.fromARGB(
+                                            255, 109, 109, 109),
+                                        offset: Offset(1.5,
+                                            1.5), // Sombra para mejorar la visibilidad
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -113,9 +122,20 @@ class _ProfileState extends State<Profile> {
                                 child: Text(
                                   _userEmail,
                                   style: TextStyle(
-                                    color: NowUIColors.white.withOpacity(0.85),
+                                    color:
+                                        const Color.fromARGB(255, 255, 255, 255)
+                                            .withOpacity(0.85),
                                     fontSize: 18,
                                     fontWeight: FontWeight.w800,
+                                    shadows: [
+                                      Shadow(
+                                        blurRadius: 3.0,
+                                        color: const Color.fromARGB(
+                                            255, 109, 109, 109),
+                                        offset: Offset(1.5,
+                                            1.5), // Sombra para mejorar la visibilidad
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),

@@ -21,9 +21,9 @@ class PrivacyPolicyDialog extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "Políticas de Privacidad",
+                    "🌟 Políticas de Privacidad 🌟",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 17,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

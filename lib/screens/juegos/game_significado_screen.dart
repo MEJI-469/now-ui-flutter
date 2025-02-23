@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:now_ui_flutter/constants/Theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../services/progreso_service.dart';
 import '../../models/progreso.dart';
@@ -6,6 +7,9 @@ import 'juego_significado_data.dart'; // Importamos la clase con los datos de lo
 
 import '../../services/juego_service.dart'; // Importamos el servicio para obtener los niveles
 import '../../models/juego.dart';
+
+import 'package:audioplayers/audioplayers.dart';
+import 'package:confetti/confetti.dart';
 
 class JuegoSignificadoScreen extends StatefulWidget {
   final int nivel;
@@ -36,8 +40,8 @@ class _JuegoSignificadoScreenState extends State<JuegoSignificadoScreen> {
   @override
   void initState() {
     super.initState();
-    _cargarProgreso();
     _cargarNivel();
+    _cargarProgreso();
   }
 
   // Carga el ID del usuario desde SharedPreferences
@@ -74,7 +78,28 @@ class _JuegoSignificadoScreenState extends State<JuegoSignificadoScreen> {
     palabraCorrecta = nivelData.palabraCorrecta;
 
     // Generamos opciones incorrectas aleatorias
-    List<String> opcionesIncorrectas = ["SILLA", "AGUA", "MESA", "CASA"];
+    List<String> opcionesIncorrectas = [
+      "SILLA",
+      "AGUA",
+      "MESA",
+      "CASA",
+      "PERRO",
+      "GATO",
+      "LUNA",
+      "SOL",
+      "FLOR",
+      "ARBOL",
+      "PATO",
+      "RANA",
+      "PISO",
+      "TEJA",
+      "LAGO",
+      "RIO",
+      "NUBE",
+      "TREN",
+      "AVION",
+      "BARCO"
+    ];
     opcionesIncorrectas.remove(palabraCorrecta);
     opcionesIncorrectas.shuffle();
 
@@ -83,20 +108,32 @@ class _JuegoSignificadoScreenState extends State<JuegoSignificadoScreen> {
     opciones.shuffle(); // Mezclamos las opciones
   }
 
+  final AudioPlayer _audioPlayer = AudioPlayer()
+    ..setReleaseMode(ReleaseMode.stop);
+  final ConfettiController _confettiController =
+      ConfettiController(duration: const Duration(seconds: 2));
+
   // Maneja la selección del usuario
   void _seleccionarOpcion(String opcionSeleccionada) async {
     if (opcionSeleccionada == palabraCorrecta) {
       print("✅ Respuesta correcta, actualizando progreso...");
 
-      /*await ProgresoService().actualizarProgreso(_usuarioId, widget.juegoId,
-          widget.nivel + 1, (widget.nivel / 7) * 100);*/ //Si no actuaiza, descomentar esta linea de codigo/////////////
+      // Reproducir sonido de acierto
+      await _audioPlayer.play(AssetSource('sounds/celebrate.mp3'));
+
+      // Activar confetti
+      _confettiController.play();
 
       // Actualizar el progreso solo si se responde correctamente
       await _completarNivel();
 
-      _mostrarDialogo("¡Correcto!", "Has adivinado la palabra correctamente.");
+      _mostrarDialogo(
+          "🎉 ¡Correcto!", "Has adivinado la palabra correctamente.");
     } else {
-      _mostrarDialogo("Incorrecto", "Inténtalo de nuevo.");
+      // Reproducir sonido de error
+      await _audioPlayer.play(AssetSource('sounds/wrong.mp3'));
+
+      _mostrarDialogo("❌ Incorrecto", "Inténtalo de nuevo.");
     }
   }
 
@@ -128,22 +165,33 @@ class _JuegoSignificadoScreenState extends State<JuegoSignificadoScreen> {
   void _mostrarDialogo(String titulo, String mensaje) {
     showDialog(
       context: context,
-      barrierDismissible: false,
       builder: (context) {
         return AlertDialog(
-          title: Text(titulo),
-          content: Text(mensaje),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-                if (titulo == "¡Correcto!") {
-                  Navigator.pop(context); // Volver a la pantalla de niveles
-                }
-              },
-              child: const Text("Continuar"),
-            ),
-          ],
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: Text(titulo, textAlign: TextAlign.center),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(mensaje),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  if (titulo == "🎉 ¡Correcto!") {
+                    Navigator.pop(context); // Volver a la pantalla de niveles
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                ),
+                child: const Text("Seguir jugando",
+                    style: TextStyle(fontSize: 16)),
+              ),
+            ],
+          ),
         );
       },
     );
@@ -154,8 +202,8 @@ class _JuegoSignificadoScreenState extends State<JuegoSignificadoScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: const Text("Selecciona su significado",
-            style: TextStyle(color: Colors.white)),
+        title: const Text("🌟 Selecciona su significado",
+            style: TextStyle(color: Colors.white, fontSize: 20)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
@@ -164,47 +212,124 @@ class _JuegoSignificadoScreenState extends State<JuegoSignificadoScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
+        padding: const EdgeInsets.all(0.0),
+        child: Stack(
           children: [
-            // Mostrar imágenes de señas
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: nivelData.imagenes.map((img) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset("assets/sign/$img", width: 60),
-                );
-              }).toList(),
+            // 🎨 Fondo de color con gradiente
+            Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.blueAccent, Colors.cyan],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
             ),
-            const SizedBox(height: 20),
-
-            // Mostrar opciones de respuesta
-            Column(
-              children: opciones.map((opcion) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  child: ElevatedButton(
-                    onPressed: () => _seleccionarOpcion(opcion),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      side: const BorderSide(color: Colors.blue),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 50),
-                    ),
-                    child: Text(
-                      opcion,
-                      style: const TextStyle(color: Colors.blue, fontSize: 18),
+            Padding(
+              padding: const EdgeInsets.all(40.0),
+              child: Column(
+                children: [
+                  // 👉 Indicador de deslizamiento
+                  Align(
+                    alignment: Alignment
+                        .centerRight, // Alinea el contenido a la derecha
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Text(
+                        "Deslizar -->",
+                        style: TextStyle(
+                          color: NowUIColors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign
+                            .end, // Alinea el texto dentro del contenedor
+                      ),
                     ),
                   ),
-                );
-              }).toList(),
+                  // Mostrar imágenes de señas con scroll horizontal
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: nivelData.imagenes.map((img) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color.fromARGB(255, 0, 70, 91)
+                                      .withOpacity(0.5), // Color de la sombra
+                                  blurRadius: 5.0, // Difuminado de la sombra
+                                  spreadRadius: 2.0, // Extensión de la sombra
+                                  offset: Offset(2.0,
+                                      2.0), // Desplazamiento de la sombra (x, y)
+                                )
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child:
+                                  Image.asset("assets/sign/$img", width: 120),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  // 🎯 Opciones con botones infantiles
+                  Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: opciones.map((opcion) {
+                      return ElevatedButton(
+                        onPressed: () => _seleccionarOpcion(opcion),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.orangeAccent,
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 25),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          elevation: 5,
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              opcion,
+                              style: const TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
             ),
 
             const SizedBox(height: 30),
 
+            // 🎉 Confetti de celebración
+            Align(
+              alignment: Alignment.topCenter,
+              child: ConfettiWidget(
+                confettiController: _confettiController,
+                blastDirectionality: BlastDirectionality.explosive,
+                shouldLoop: false,
+                colors: [Colors.green, Colors.blue, Colors.yellow, Colors.red],
+              ),
+            ),
+
             // Botón para pasar al siguiente nivel (se activará solo si acierta)
-            ElevatedButton(
+            /*ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -215,7 +340,7 @@ class _JuegoSignificadoScreenState extends State<JuegoSignificadoScreen> {
               ),
               child: const Text("Siguiente",
                   style: TextStyle(color: Colors.white, fontSize: 18)),
-            ),
+            ),*/
           ],
         ),
       ),

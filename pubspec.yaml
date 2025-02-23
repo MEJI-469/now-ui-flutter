@@ -32,6 +32,9 @@ dependencies:
   native_device_orientation: ^1.1.1
   permission_handler: ^11.0.1
   google_fonts: ^6.2.1
+
+  audioplayers: ^6.2.0  # 🔊 Reproduce sonidos
+  confetti: ^0.8.0      # 🎉 Animación de confetti
   
   intl: ^0.18.0
   shared_preferences: ^2.3.5
@@ -51,11 +54,21 @@ dev_dependencies:
     sdk: flutter
   camera: ^0.11.0
   flutter_tts: ^3.2.2
+  flutter_launcher_icons: ^0.14.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
   flutter_lints: ^5.0.0
 # The following section is specific to Flutter.
+
+# Aquí, a continuación, define tu configuración de flutter_launcher_icons:
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/imgs/logo-of-bw.png"        # Ruta de tu ícono
+  adaptive_icon_background: "#FFFFFF"  # color de fondo para íconos adaptativos
+  # ejecutar este codigo en la terminal del proyecto para generar el icono de la app: flutter pub run flutter_launcher_icons:main
+
 flutter:
 
   # The following line ensures that the Material Icons font is
@@ -81,7 +94,7 @@ flutter:
     - assets/imgs/album-6.jpg
     - assets/imgs/onboarding-free.png
     - assets/imgs/invision-white-slim.png
-    - assets/imgs/logo-mat.png
+    - assets/imgs/logo-of-bw.png
     - assets/imgs/juegos-fondo.png
     - assets/imgs/
     - assets/sign/
@@ -90,6 +103,7 @@ flutter:
     - assets/colors/
     - assets/months/
     - assets/anime/
+    - assets/sounds/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

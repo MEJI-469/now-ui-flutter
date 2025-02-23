@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:now_ui_flutter/constants/Theme.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Carousel extends StatefulWidget {
   final List<Map<String, String>> imgArray;
@@ -17,6 +19,14 @@ class Carousel extends StatefulWidget {
 
 class _CarouselState extends State<Carousel> {
   int _current = 0;
+
+  void _launchURL(String link) async {
+    final Uri url = Uri.parse(link);
+
+    if (!await launchUrl(url)) {
+      throw 'No se pudo lanzar $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,11 +84,14 @@ class _CarouselState extends State<Carousel> {
                           SizedBox(height: 10), // Espaciado antes del icono
                           // 🔹 Icono como botón
                           IconButton(
-                            icon: Icon(Icons.info_outline,
-                                color: NowUIColors.primary, size: 30),
+                            icon: FaIcon(
+                              FontAwesomeIcons.whatsapp,
+                              color: NowUIColors.inputSuccess,
+                              size: 40,
+                            ),
                             onPressed: () {
-                              print("Botón de información presionado");
-                              // Aquí puedes navegar a otra pantalla o ejecutar una acción
+                              item["url"]!;
+                              _launchURL(item["url"]!);
                             },
                           ),
                         ],
