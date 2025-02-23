@@ -3,10 +3,12 @@ import 'package:now_ui_flutter/constants/Theme.dart';
 
 class CardSmall extends StatelessWidget {
   const CardSmall(
-      {Key? key, this.title = "Placeholder Title",
+      {Key? key,
+      this.title = "Placeholder Title",
       this.cta = "",
       this.img = "https://via.placeholder.com/200",
-      this.tap = defaultFunc}) : super(key: key);
+      this.tap = defaultFunc})
+      : super(key: key);
 
   final String cta;
   final String img;
@@ -57,13 +59,13 @@ class CardSmall extends StatelessWidget {
                         children: [
                           Text(title,
                               style: TextStyle(
-                                  color: NowUIColors.text, fontSize: 12)),
+                                  color: NowUIColors.text, fontSize: 15)),
                           Padding(
                             padding: const EdgeInsets.only(top: 8.0),
                             child: Text(cta,
                                 style: TextStyle(
                                     color: NowUIColors.primary,
-                                    fontSize: 11,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w600)),
                           )
                         ],

@@ -28,6 +28,32 @@ class _LoginState extends State<Login> {
   final TextEditingController _passwordController = TextEditingController();
   final UsuarioService _usuarioService = UsuarioService();
 
+  // Colores iniciales para los iconos de verificación
+  Color _usernameIconColor = Colors.grey;
+  Color _passwordIconColor = Colors.grey;
+
+  // Método para actualizar el color del icono de usuario
+  void _updateUsernameIcon() {
+    setState(() {
+      if (_usernameController.text.isEmpty) {
+        _usernameIconColor = Colors.red; // Rojo si está vacío
+      } else {
+        _usernameIconColor = Colors.green; // Verde si tiene texto
+      }
+    });
+  }
+
+  // Método para actualizar el color del icono de contraseña
+  void _updatePasswordIcon() {
+    setState(() {
+      if (_passwordController.text.isEmpty) {
+        _passwordIconColor = Colors.red; // Rojo si está vacío
+      } else {
+        _passwordIconColor = Colors.green; // Verde si tiene texto
+      }
+    });
+  }
+
   // El height venía de window, puedes usarlo o quitarlo
   final double height = window.physicalSize.height;
 
@@ -91,8 +117,37 @@ class _LoginState extends State<Login> {
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    // Agregar listeners para actualizar los iconos en tiempo real
+    _usernameController.addListener(_updateUsernameIcon);
+    _passwordController.addListener(_updatePasswordIcon);
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Login",
+          style:
+              TextStyle(color: NowUIColors.white, fontWeight: FontWeight.w600),
+        ),
+        backgroundColor: NowUIColors.primary,
+        leading: IconButton(
+          icon:
+              const Icon(Icons.arrow_back, color: NowUIColors.white, size: 28),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       extendBodyBehindAppBar: true,
       drawer: NowDrawer(currentPage: "Login"),
       body: Stack(
@@ -156,7 +211,7 @@ class _LoginState extends State<Login> {
                                     top: 10.0, bottom: 10.0),
                                 child: Center(
                                   child: Text(
-                                    "Binevenido a nuestra App",
+                                    "Binevenido a Mano Amiga",
                                     style: TextStyle(
                                       color: NowUIColors.time,
                                       fontWeight: FontWeight.w200,
@@ -175,11 +230,15 @@ class _LoginState extends State<Login> {
                                     child: Input(
                                       placeholder: "Su Usuario...",
                                       prefixIcon: Icon(Icons.email, size: 20),
-                                      suffixIcon: Icon(Icons.check),
+                                      suffixIcon: Icon(Icons.check,
+                                          color: _usernameIconColor),
                                       // NUEVO: usa el controller
                                       controller: _usernameController,
                                       onTap: () {
                                         print("Input tapped!");
+                                        setState(() {
+                                          _usernameIconColor = Colors.red;
+                                        });
                                       },
                                       onChanged: (value) {
                                         print("Nuevo valor: $value");
@@ -196,13 +255,17 @@ class _LoginState extends State<Login> {
                                     child: Input(
                                       placeholder: "Contraseña...",
                                       prefixIcon: Icon(Icons.lock, size: 20),
-                                      suffixIcon: Icon(Icons.check),
+                                      suffixIcon: Icon(Icons.check,
+                                          color: _passwordIconColor),
                                       obscureText: true,
                                       // NUEVO: usa el controller
                                       controller: _passwordController,
                                       // si el widget Input lo permite, podrías agregar obscureText: true
                                       onTap: () {
                                         print("Input tapped!");
+                                        setState(() {
+                                          _passwordIconColor = Colors.red;
+                                        });
                                       },
                                       onChanged: (value) {
                                         print("Nuevo valor: $value");
@@ -217,7 +280,7 @@ class _LoginState extends State<Login> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        Checkbox(
+                                        /*Checkbox(
                                           activeColor: NowUIColors.primary,
                                           onChanged: (bool? newValue) =>
                                               setState(
@@ -231,7 +294,7 @@ class _LoginState extends State<Login> {
                                               color: NowUIColors.black,
                                               fontSize: 12,
                                               fontWeight: FontWeight.w200),
-                                        ),
+                                        ),*/
                                       ],
                                     ),
                                   ),
@@ -245,6 +308,7 @@ class _LoginState extends State<Login> {
                                           style: TextStyle(
                                             color: NowUIColors.black,
                                             fontSize: 12,
+                                            fontWeight: FontWeight.w600,
                                           ),
                                         ),
                                         GestureDetector(
@@ -257,6 +321,7 @@ class _LoginState extends State<Login> {
                                             style: TextStyle(
                                               color: Colors.blue,
                                               fontSize: 14,
+                                              fontWeight: FontWeight.w600,
                                               decoration:
                                                   TextDecoration.underline,
                                             ),
@@ -267,6 +332,7 @@ class _LoginState extends State<Login> {
                                   ),
                                 ],
                               ),
+                              SizedBox(height: 8.0),
                               // Botón de login
                               Center(
                                 child: ElevatedButton(

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:now_ui_flutter/constants/Theme.dart';
 
 class CardSquare extends StatelessWidget {
-  const CardSquare({Key? key, 
+  const CardSquare({
+    Key? key,
     this.title = "Placeholder Title",
     this.cta = "",
     this.img = "https://via.placeholder.com/200",
@@ -59,11 +60,11 @@ class CardSquare extends StatelessWidget {
                           children: [
                             Text(title,
                                 style: TextStyle(
-                                    color: NowUIColors.text, fontSize: 12)),
+                                    color: NowUIColors.text, fontSize: 15)),
                             Text(cta,
                                 style: TextStyle(
                                     color: NowUIColors.primary,
-                                    fontSize: 11,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w600))
                           ],
                         ),

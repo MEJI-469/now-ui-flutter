@@ -3,19 +3,19 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:now_ui_flutter/constants/Theme.dart';
 
-class ProductCarousel extends StatefulWidget {
+class Carousel extends StatefulWidget {
   final List<Map<String, String>> imgArray;
 
-  const ProductCarousel({
+  const Carousel({
     Key? key,
     required this.imgArray,
   }) : super(key: key);
 
   @override
-  _ProductCarouselState createState() => _ProductCarouselState();
+  _CarouselState createState() => _CarouselState();
 }
 
-class _ProductCarouselState extends State<ProductCarousel> {
+class _CarouselState extends State<Carousel> {
   int _current = 0;
 
   @override
@@ -55,9 +55,12 @@ class _ProductCarouselState extends State<ProductCarousel> {
                           Text(item["price"]!,
                               style: TextStyle(
                                   fontSize: 16, color: NowUIColors.text)),
-                          Text(item["title"]!,
-                              style: TextStyle(
-                                  fontSize: 32, color: NowUIColors.text)),
+                          Text(
+                            item["title"]!,
+                            style: TextStyle(
+                                fontSize: 32, color: NowUIColors.text),
+                            textAlign: TextAlign.center,
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(
                                 left: 16.0, right: 16.0, top: 8),
@@ -67,7 +70,17 @@ class _ProductCarouselState extends State<ProductCarousel> {
                                   fontSize: 16, color: NowUIColors.muted),
                               textAlign: TextAlign.center,
                             ),
-                          )
+                          ),
+                          SizedBox(height: 10), // Espaciado antes del icono
+                          // 🔹 Icono como botón
+                          IconButton(
+                            icon: Icon(Icons.info_outline,
+                                color: NowUIColors.primary, size: 30),
+                            onPressed: () {
+                              print("Botón de información presionado");
+                              // Aquí puedes navegar a otra pantalla o ejecutar una acción
+                            },
+                          ),
                         ],
                       ),
                     )

@@ -124,7 +124,7 @@ class _SettingsState extends State<Settings> {
                               ),
                             ),
                           ),
-                          TableCellSettings(
+                          /*TableCellSettings(
                             title: "Borrar historial",
                             onTap: () {
                               DialogUtils.showConfirmationDialog(
@@ -142,7 +142,7 @@ class _SettingsState extends State<Settings> {
                                 },
                               );
                             },
-                          ),
+                          ),*/
                           TableCellSettings(
                             title: "Exportar historial",
                             onTap: () {
@@ -206,7 +206,13 @@ class _SettingsState extends State<Settings> {
                           TableCellSettings(
                             title: "Contactar con soporte",
                             onTap: () {
-                              Navigator.pushNamed(context, '/soporte');
+                              Navigator.pushNamed(context, '/developers');
+                            },
+                          ),
+                          TableCellSettings(
+                            title: "Redes Sociales",
+                            onTap: () {
+                              Navigator.pushNamed(context, '/networks');
                             },
                           ),
                           // ------------------------------------------------------

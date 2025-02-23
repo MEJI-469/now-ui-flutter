@@ -3,10 +3,12 @@ import 'package:now_ui_flutter/constants/Theme.dart';
 
 class CardHorizontal extends StatelessWidget {
   const CardHorizontal(
-      {Key? key, this.title = "Placeholder Title",
+      {Key? key,
+      this.title = "Placeholder Title",
       this.cta = "",
       this.img = "https://via.placeholder.com/200",
-      this.tap = defaultFunc}) : super(key: key);
+      this.tap = defaultFunc})
+      : super(key: key);
 
   final String cta;
   final String img;
@@ -55,11 +57,11 @@ class CardHorizontal extends StatelessWidget {
                         children: [
                           Text(title,
                               style: TextStyle(
-                                  color: NowUIColors.text, fontSize: 12)),
+                                  color: NowUIColors.text, fontSize: 15)),
                           Text(cta,
                               style: TextStyle(
                                   color: NowUIColors.primary,
-                                  fontSize: 11,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w600))
                         ],
                       ),

@@ -97,15 +97,6 @@ class NowDrawer extends StatelessWidget {
                   iconColor: NowUIColors.warning,
                   title: "Perfil",
                   isSelected: currentPage == "Profile" ? true : false),
-              /*DrawerTile(
-                  icon: FontAwesomeIcons.fileInvoice,
-                  onTap: () {
-                    if (currentPage != "History")
-                      Navigator.pushReplacementNamed(context, '/history');
-                  },
-                  iconColor: NowUIColors.info,
-                  title: "Historial",
-                  isSelected: currentPage == "History" ? true : false),*/
               DrawerTile(
                   icon: FontAwesomeIcons.cog,
                   onTap: () {
@@ -116,6 +107,15 @@ class NowDrawer extends StatelessWidget {
                   iconColor: NowUIColors.success,
                   title: "Ajustes",
                   isSelected: currentPage == "Settings" ? true : false),
+              DrawerTile(
+                  icon: FontAwesomeIcons.code,
+                  onTap: () {
+                    if (currentPage != "Developers")
+                      Navigator.pushReplacementNamed(context, '/developers');
+                  },
+                  iconColor: NowUIColors.info,
+                  title: "Desarrolladores",
+                  isSelected: currentPage == "Developers" ? true : false),
               /*DrawerTile(
                   icon: FontAwesomeIcons.windows,
                   onTap: () {

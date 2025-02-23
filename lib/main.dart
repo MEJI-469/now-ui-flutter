@@ -18,7 +18,8 @@ import 'package:now_ui_flutter/screens/alphabet_screen.dart';
 import 'package:now_ui_flutter/screens/signstotext_screen.dart';
 import 'package:now_ui_flutter/screens/texttosigns_screen.dart';
 import 'package:now_ui_flutter/screens/screen-templates.dart';
-import 'package:now_ui_flutter/screens/soporte.dart';
+import 'package:now_ui_flutter/screens/developers.dart';
+import 'package:now_ui_flutter/screens/networks.dart';
 import 'package:now_ui_flutter/screens/edit_profile.dart';
 
 // <-- Asegúrate de importar tu nuevo CheckSession
@@ -54,7 +55,8 @@ class MyApp extends StatelessWidget {
         "/singtotext": (BuildContext context) => SignToTextScreen(),
         "/texttosing": (BuildContext context) => TextToSignScreen(),
         "/screens": (BuildContext context) => ScreenTemplates(),
-        "/soporte": (BuildContext context) => Soporte(),
+        "/developers": (BuildContext context) => Developers(),
+        "/networks": (BuildContext context) => Networks(),
         "/edit-profile": (BuildContext context) => EditProfile(),
       },
     );

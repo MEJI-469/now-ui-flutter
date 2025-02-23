@@ -73,7 +73,7 @@ class _ProfileState extends State<Profile> {
                 child: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("assets/imgs/bg-perfil.png"),
+                      image: AssetImage("assets/anime/per-anime.png"),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -101,8 +101,8 @@ class _ProfileState extends State<Profile> {
                                   _userName,
                                   style: TextStyle(
                                     color: NowUIColors.white,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 26, // un poco más grande
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 28, // un poco más grande
                                     // fontFamily: 'KidFont', // Si agregas una fuente para niños
                                   ),
                                 ),
@@ -114,8 +114,8 @@ class _ProfileState extends State<Profile> {
                                   _userEmail,
                                   style: TextStyle(
                                     color: NowUIColors.white.withOpacity(0.85),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w800,
                                   ),
                                 ),
                               ),

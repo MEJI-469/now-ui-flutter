@@ -31,8 +31,8 @@ final Map<String, Map<String, String>> homeCards = {
   },
 };
 
-class Soporte extends StatelessWidget {
-  const Soporte({Key? key}) : super(key: key);
+class Networks extends StatelessWidget {
+  const Networks({Key? key}) : super(key: key);
 
   void _launchURL(String link) async {
     final Uri url = Uri.parse(link);
@@ -46,7 +46,7 @@ class Soporte extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       /*appBar: Navbar(
-        title: "Soporte",
+        title: "Redes Sociales",
         reverseTextcolor: true,
         tags: [], // List<String> obligatorio
         getCurrentPage: () => 0, // o alguna lógica que retorne un int
@@ -58,7 +58,7 @@ class Soporte extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.blue,
         title: const Text(
-          "Soporte",
+          "Redes Sociales",
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w500,
@@ -85,7 +85,7 @@ class Soporte extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 16.0),
                   child: Text(
-                    "Soporte y Ayuda",
+                    "Redes Sociales",
                     style: TextStyle(
                       color: NowUIColors.text,
                       fontWeight: FontWeight.w600,
@@ -97,7 +97,7 @@ class Soporte extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
                 child: CardHorizontal(
-                  cta: "Contactar",
+                  cta: "Visitar",
                   title: homeCards["Facebook"]!['title']!,
                   img: homeCards["Facebook"]!['image']!,
                   tap: () {
@@ -114,7 +114,7 @@ class Soporte extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
                 child: CardHorizontal(
-                  cta: "Contactar",
+                  cta: "Visitar",
                   title: homeCards["Instagram"]!['title']!,
                   img: homeCards["Instagram"]!['image']!,
                   tap: () {

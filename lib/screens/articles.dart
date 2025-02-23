@@ -259,7 +259,7 @@ class Articles extends StatelessWidget {
                           )),
                         ]),
                   ),
-                  ProductCarousel(
+                  Carousel(
                       imgArray: articlesCards["Music"]!["products"]),
                 ],
               ),
