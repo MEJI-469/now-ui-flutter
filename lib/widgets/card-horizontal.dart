@@ -57,7 +57,7 @@ class CardHorizontal extends StatelessWidget {
                         children: [
                           Text(title,
                               style: TextStyle(
-                                  color: NowUIColors.text, fontSize: 15)),
+                                  color: NowUIColors.text, fontSize: 13)),
                           Text(cta,
                               style: TextStyle(
                                   color: NowUIColors.primary,

@@ -162,6 +162,13 @@ class _SingsScreenState extends State<SingsScreen> {
           style: TextStyle(color: Colors.white), // Changed text color
         ),
         backgroundColor: Colors.blueAccent, // Changed background color
+        leading: IconButton(
+          icon:
+              Icon(Icons.arrow_back, color: Colors.white), // Changed icon color
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Container(
         decoration: BoxDecoration(
