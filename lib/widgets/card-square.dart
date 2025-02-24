@@ -60,11 +60,11 @@ class CardSquare extends StatelessWidget {
                           children: [
                             Text(title,
                                 style: TextStyle(
-                                    color: NowUIColors.text, fontSize: 13)),
+                                    color: NowUIColors.text, fontSize: 14)),
                             Text(cta,
                                 style: TextStyle(
                                     color: NowUIColors.primary,
-                                    fontSize: 14,
+                                    fontSize: 13,
                                     fontWeight: FontWeight.w600))
                           ],
                         ),
