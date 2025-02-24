@@ -233,133 +233,161 @@ class _SignToTextScreenState extends State<SignToTextScreen>
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Nuevo Traductor IA',
+          'Traductor IA',
           style: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
         ),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: const Color.fromRGBO(68, 138, 255, 1),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon:
+              Icon(Icons.arrow_back, color: Colors.white), // Changed icon color
           onPressed: () {
             Navigator.pop(context);
           },
         ),
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 370,
-            width: 350,
-            child: isCameraInitialized
-                ? Padding(
-                    padding: const EdgeInsets.all(3.0),
-                    child: ClipRect(
-                      child: _cameraView(),
+      body: Container(
+        decoration: NowUIColors.signToTextGradient(), // Added gradient
+        child: Column(
+          children: [
+            SizedBox(
+              height: 370,
+              width: 350,
+              child: isCameraInitialized
+                  ? Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: ClipRect(
+                        child: _cameraView(),
+                      ),
+                    )
+                  : Center(
+                      child: Icon(
+                        Icons.camera_alt,
+                        size: 75,
+                        color: Colors.grey,
+                      ),
                     ),
-                  )
-                : Center(
-                    child: Icon(
-                      Icons.camera_alt,
-                      size: 75,
-                      color: Colors.grey,
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Row(
+                      children: [
+                        Text(
+                          "Detectar",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: const Color.fromARGB(255, 255, 255, 255)),
+                        ),
+                        Switch.adaptive(
+                          value: switchValueOne,
+                          onChanged: (bool newValue) {
+                            setState(() {
+                              switchValueOne = newValue;
+                              if (newValue) {
+                                startDetection();
+                              } else {
+                                stopDetection();
+                              }
+                            });
+                          },
+                          activeColor: NowUIColors.primary,
+                        ),
+                      ],
                     ),
                   ),
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Row(
-                    children: [
-                      Text(
-                        "Detectar",
-                        style: TextStyle(color: NowUIColors.text),
+                  SizedBox(width: 15),
+                  Expanded(
+                    flex: 3,
+                    child: ElevatedButton.icon(
+                      onPressed: switchCamera,
+                      icon: Icon(Icons.switch_camera, color: Colors.blueAccent),
+                      label: Text(
+                        'Cambiar cámara',
+                        style: TextStyle(color: Colors.blueAccent),
                       ),
-                      Switch.adaptive(
-                        value: switchValueOne,
-                        onChanged: (bool newValue) {
-                          setState(() {
-                            switchValueOne = newValue;
-                            if (newValue) {
-                              startDetection();
-                            } else {
-                              stopDetection();
-                            }
-                          });
-                        },
-                        activeColor: NowUIColors.primary,
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(20, 40),
+                        foregroundColor: Colors.blueAccent,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Señas traducidas a texto',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueAccent),
+                  ),
+                  SizedBox(height: 8),
+                  TextField(
+                    readOnly: true,
+                    maxLines: 3,
+                    decoration: InputDecoration(
+                      hintText: 'Texto traducido',
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(),
+                    ),
+                    controller: TextEditingController(text: translatedText),
+                  ),
+                  SizedBox(height: 16),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FloatingActionButton.extended(
+                      onPressed: speakText,
+                      label: Text(
+                        'Reproducir',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      icon: Icon(Icons.volume_up_rounded, color: Colors.white),
+                      backgroundColor: Colors
+                          .blueAccent, // O usa un color que combine con tu diseño
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                        onPressed: saveTranslation,
+                        child: Text(
+                          'Guardar',
+                          style: TextStyle(color: Colors.blueAccent),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.blueAccent,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: clearTranslation,
+                        child: Text(
+                          'Limpiar',
+                          style: TextStyle(color: Colors.blueAccent),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.blueAccent,
+                        ),
                       ),
                     ],
                   ),
-                ),
-                SizedBox(width: 15),
-                Expanded(
-                  flex: 3,
-                  child: ElevatedButton.icon(
-                    onPressed: switchCamera,
-                    icon: Icon(Icons.switch_camera),
-                    label: Text('Cambiar cámara'),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(20, 40),
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Señas traducidas a texto',
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blueAccent),
-                ),
-                SizedBox(height: 8),
-                TextField(
-                  readOnly: true,
-                  maxLines: 3,
-                  decoration: InputDecoration(
-                    hintText: 'Texto traducido',
-                    border: OutlineInputBorder(),
-                  ),
-                  controller: TextEditingController(text: translatedText),
-                ),
-                SizedBox(height: 16),
-                SizedBox(
-                  width: double.infinity,
-                  child: FloatingActionButton.extended(
-                    onPressed: speakText,
-                    label: Text('Reproducir'),
-                    icon: Icon(Icons.volume_up_rounded),
-                    backgroundColor: Colors.blueAccent,
-                  ),
-                ),
-                SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                      onPressed: saveTranslation,
-                      child: Text('Guardar'),
-                    ),
-                    ElevatedButton(
-                      onPressed: clearTranslation,
-                      child: Text('Limpiar'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

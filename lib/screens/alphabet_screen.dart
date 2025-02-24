@@ -28,169 +28,195 @@ class AlphabetScreen extends StatelessWidget {
       backgroundColor: NowUIColors.bgColorScreen,
       extendBodyBehindAppBar: true,
       drawer: NowDrawer(currentPage: "Alphabet"),
-      body: SafeArea(
-        child: Center(
-            child: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              //Inicia boton letras
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          SingsScreen(contentType: 'alphabet'),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(20),
-                    textStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    )),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: const [
-                        Icon(
-                          Icons.abc,
-                          size: 40,
-                        ),
-                        SizedBox(width: 20),
-                        Text('Abecedario'),
-                      ],
-                    ),
-                    const Icon(
-                      Icons.arrow_forward,
-                      size: 30,
-                    ),
-                  ],
+      body: Container(
+        decoration: NowUIColors.alphabetGradient(), // Added gradient
+        child: SafeArea(
+          child: Center(
+              child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                //Inicia boton letras
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SingsScreen(contentType: 'alphabet'),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(20),
+                      textStyle: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.blueAccent, // Changed text color
+                        fontWeight: FontWeight.bold,
+                      )),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: const [
+                          Icon(
+                            Icons.abc,
+                            size: 40,
+                            color: Colors.blueAccent, // Changed icon color
+                          ),
+                          SizedBox(width: 20),
+                          Text('Abecedario',
+                              style: TextStyle(
+                                  color:
+                                      Colors.blueAccent)), // Changed text color
+                        ],
+                      ),
+                      const Icon(
+                        Icons.arrow_forward,
+                        size: 30,
+                        color: Colors.blueAccent, // Changed icon color
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              //Inicia boton numeros
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SingsScreen(contentType: 'numbers'),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(20),
-                    textStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    )),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: const [
-                        Icon(
-                          Icons.numbers,
-                          size: 40,
-                        ),
-                        SizedBox(width: 20),
-                        Text('Numeros'),
-                      ],
-                    ),
-                    const Icon(
-                      Icons.arrow_forward,
-                      size: 30,
-                    ),
-                  ],
+                const SizedBox(height: 20),
+                //Inicia boton numeros
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SingsScreen(contentType: 'numbers'),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(20),
+                      textStyle: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.blueAccent, // Changed text color
+                        fontWeight: FontWeight.bold,
+                      )),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: const [
+                          Icon(
+                            Icons.numbers,
+                            size: 40,
+                            color: Colors.blueAccent, // Changed icon color
+                          ),
+                          SizedBox(width: 20),
+                          Text('Numeros',
+                              style: TextStyle(
+                                  color:
+                                      Colors.blueAccent)), // Changed text color
+                        ],
+                      ),
+                      const Icon(
+                        Icons.arrow_forward,
+                        size: 30,
+                        color: Colors.blueAccent, // Changed icon color
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              //Inicia boton Meses
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SingsScreen(contentType: 'months'),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(20),
-                    textStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    )),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: const [
-                        Icon(
-                          Icons.calendar_month,
-                          size: 40,
-                        ),
-                        SizedBox(width: 20),
-                        Text('Meses del Año'),
-                      ],
-                    ),
-                    const Icon(
-                      Icons.arrow_forward,
-                      size: 30,
-                    ),
-                  ],
+                const SizedBox(height: 20),
+                //Inicia boton Meses
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SingsScreen(contentType: 'months'),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(20),
+                      textStyle: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.blueAccent, // Changed text color
+                        fontWeight: FontWeight.bold,
+                      )),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: const [
+                          Icon(
+                            Icons.calendar_month,
+                            size: 40,
+                            color: Colors.blueAccent, // Changed icon color
+                          ),
+                          SizedBox(width: 20),
+                          Text('Meses del Año',
+                              style: TextStyle(
+                                  color:
+                                      Colors.blueAccent)), // Changed text color
+                        ],
+                      ),
+                      const Icon(
+                        Icons.arrow_forward,
+                        size: 30,
+                        color: Colors.blueAccent, // Changed icon color
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              //Inicia boton Colores
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SingsScreen(contentType: 'colors'),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(20),
-                    textStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    )),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: const [
-                        Icon(
-                          Icons.color_lens,
-                          size: 40,
-                        ),
-                        SizedBox(width: 20),
-                        Text('Colores'),
-                      ],
-                    ),
-                    const Icon(
-                      Icons.arrow_forward,
-                      size: 30,
-                    ),
-                  ],
+                const SizedBox(height: 20),
+                //Inicia boton Colores
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SingsScreen(contentType: 'colors'),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(20),
+                      textStyle: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.blueAccent, // Changed text color
+                        fontWeight: FontWeight.bold,
+                      )),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: const [
+                          Icon(
+                            Icons.color_lens,
+                            size: 40,
+                            color: Colors.blueAccent, // Changed icon color
+                          ),
+                          SizedBox(width: 20),
+                          Text('Colores',
+                              style: TextStyle(
+                                  color:
+                                      Colors.blueAccent)), // Changed text color
+                        ],
+                      ),
+                      const Icon(
+                        Icons.arrow_forward,
+                        size: 30,
+                        color: Colors.blueAccent, // Changed icon color
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-            ],
-          ),
-        )),
+                const SizedBox(height: 20),
+              ],
+            ),
+          )),
+        ),
       ),
     );
   }

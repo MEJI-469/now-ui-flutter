@@ -157,44 +157,64 @@ class _SingsScreenState extends State<SingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sings Screen'),
-        backgroundColor: Colors.blueAccent,
+        title: Text(
+          'Lenguaje de señas',
+          style: TextStyle(color: Colors.white), // Changed text color
+        ),
+        backgroundColor: Colors.blueAccent, // Changed background color
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.all(8.0),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 8.0,
-                mainAxisSpacing: 8.0,
-              ),
-              itemCount: currentContent.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    showImageDialog(
-                      currentContent[index]['image']!,
-                      currentContent[index]['text']!,
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Image.asset(currentContent[index]['image']!,
-                            errorBuilder: (context, error, stackTrace) {
-                          return Icon(Icons.error, size: 50, color: Colors.red);
-                        }),
-                      ),
-                      Text(currentContent[index]['text']!),
-                    ],
-                  ),
-                );
-              },
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.blueAccent, Colors.lightBlueAccent],
           ),
-        ],
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              child: GridView.builder(
+                padding: const EdgeInsets.all(8.0),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8.0,
+                  mainAxisSpacing: 8.0,
+                ),
+                itemCount: currentContent.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      showImageDialog(
+                        currentContent[index]['image']!,
+                        currentContent[index]['text']!,
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: Image.asset(currentContent[index]['image']!,
+                              errorBuilder: (context, error, stackTrace) {
+                            return Icon(Icons.error,
+                                size: 50, color: Colors.red);
+                          }),
+                        ),
+                        Text(
+                          currentContent[index]['text']!,
+                          style: TextStyle(
+                            color: Colors.white, // Changed text color
+                            fontWeight: FontWeight.bold, // Made text bold
+                            fontSize: 18, // Increased font size
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
