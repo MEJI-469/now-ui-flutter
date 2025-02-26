@@ -65,7 +65,7 @@ class _SingsScreenState extends State<SingsScreen> {
     'azul',
     'blanco',
     'brillante',
-    'cafe',
+    'cafe', // Renamed to avoid tilde
     'claro',
     'color',
     'gris',
@@ -129,7 +129,7 @@ class _SingsScreenState extends State<SingsScreen> {
         currentContent = colors
             .map((color) => {
                   'image': 'assets/colors/$color.png',
-                  'text': color.capitalize()
+                  'text': color == 'cafe' ? 'Café' : color.capitalize()
                 })
             .toList();
         break;
