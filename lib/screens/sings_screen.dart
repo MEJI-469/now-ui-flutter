@@ -79,6 +79,25 @@ class _SingsScreenState extends State<SingsScreen> {
     'rosa',
     'verde'
   ];
+  final List<String> week = [
+    'lunes',
+    'martes',
+    'miercoles', // Renamed to avoid tilde
+    'jueves',
+    'viernes',
+    'sabado', // Renamed to avoid tilde
+    'domingo',
+  ];
+  final List<String> animals = [
+    'cerdo',
+    'chango',
+    'elefante',
+    'gallo',
+    'jirafa',
+    'oso',
+    'perro',
+    'pez',
+  ];
 
   @override
   void initState() {
@@ -111,6 +130,26 @@ class _SingsScreenState extends State<SingsScreen> {
             .map((color) => {
                   'image': 'assets/colors/$color.png',
                   'text': color.capitalize()
+                })
+            .toList();
+        break;
+      case 'week':
+        currentContent = week
+            .map((wee) => {
+                  'image': 'assets/week/$wee.png',
+                  'text': wee == 'miercoles'
+                      ? 'Miércoles'
+                      : wee == 'sabado'
+                          ? 'Sábado'
+                          : wee.capitalize()
+                })
+            .toList();
+        break;
+      case 'animals':
+        currentContent = animals
+            .map((animal) => {
+                  'image': 'assets/animals/$animal.png',
+                  'text': animal.capitalize()
                 })
             .toList();
         break;

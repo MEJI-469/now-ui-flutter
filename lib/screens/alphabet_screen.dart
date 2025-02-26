@@ -213,6 +213,93 @@ class AlphabetScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
+                //Inicia boton Semana
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SingsScreen(contentType: 'week'),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(20),
+                      textStyle: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.blueAccent, // Changed text color
+                        fontWeight: FontWeight.bold,
+                      )),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: const [
+                          Icon(
+                            Icons.calendar_today,
+                            size: 40, // Changed icon to calendar_today
+                            color: Colors.blueAccent, // Changed icon color
+                          ),
+                          SizedBox(width: 20),
+                          Text('Días de la Semana',
+                              style: TextStyle(
+                                  color:
+                                      Colors.blueAccent)), // Changed text color
+                        ],
+                      ),
+                      const Icon(
+                        Icons.arrow_forward,
+                        size: 30,
+                        color: Colors.blueAccent, // Changed icon color
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                //Inicia boton Animales
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SingsScreen(contentType: 'animals'),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(20),
+                      textStyle: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.blueAccent, // Changed text color
+                        fontWeight: FontWeight.bold,
+                      )),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: const [
+                          Icon(
+                            Icons.pets,
+                            size: 40, // Changed icon to pets
+                            color: Colors.blueAccent, // Changed icon color
+                          ),
+                          SizedBox(width: 20),
+                          Text('Animales',
+                              style: TextStyle(
+                                  color:
+                                      Colors.blueAccent)), // Changed text color
+                        ],
+                      ),
+                      const Icon(
+                        Icons.arrow_forward,
+                        size: 30,
+                        color: Colors.blueAccent, // Changed icon color
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
               ],
             ),
           )),
