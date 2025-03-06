@@ -150,7 +150,7 @@ class _SettingsState extends State<Settings> {
                               _showExportDialog();
                             },
                           ),
-                          TableCellSettings(
+                          /*TableCellSettings(
                             title: "Reiniciar progreso de juegos",
                             onTap: () {
                               DialogUtils.showConfirmationDialog(
@@ -168,7 +168,7 @@ class _SettingsState extends State<Settings> {
                                 },
                               );
                             },
-                          ),
+                          ),*/
                           SizedBox(height: 36.0),
                           // ------------------------------------------------------
                           // Sección: Soporte y Ayuda
