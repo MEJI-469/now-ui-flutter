@@ -22,7 +22,7 @@ final Map<String, Map<String, dynamic>> articlesCards = {
     "participants": [
       {
         "img":
-            "https://scontent.fcue2-1.fna.fbcdn.net/v/t39.30808-6/464858886_2382641502067015_9201867715336565630_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFxUiICc_klJ1UThpjF5ZrZvuX8mwJHL2u-5fybAkcva18fwEAtHyAEAhOG2XRASlrQX5c5zEsm1a5Sk67R5brk&_nc_ohc=w_oUyj3CslAQ7kNvgFBws-I&_nc_oc=Adg-GjB7uUB16FJFze5irtoU_A-ozsZhjIQBJrHGzgXteVIrfhPyb-j6bPqABW7Yo-0&_nc_zt=23&_nc_ht=scontent.fcue2-1.fna&_nc_gid=ANzYKqaHeMutAj5bSqxGcAi&oh=00_AYBiwO9WZGMZJ7orTalIEOnBfwwkH_6T-BFHbInCclVbmw&oe=67BFEC84",
+            "https://www.google.com/url?sa=i&url=https%3A%2F%2Fes.pngtree.com%2Ffreepng%2Fprogrammer-clipart-developer-sitting-behind-his-computer-in-glasses-cartoon-vector_11075227.html&psig=AOvVaw06MiMKSir8GXLr_9Lu3fZo&ust=1741564886158000&source=images&cd=vfe&opi=89978449&ved=0CBYQjRxqFwoTCPjN9vjY-4sDFQAAAAAdAAAAABAE",
         "title": "Derek Vergara",
         "description": "Scrum Master, Desarrollador y Tester",
         "price": "\©",

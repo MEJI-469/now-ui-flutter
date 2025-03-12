@@ -12,7 +12,7 @@ class NowDrawer extends StatelessWidget {
   const NowDrawer({Key? key, required this.currentPage}) : super(key: key);
 
   _launchURL() async {
-    final Uri url = Uri.parse('https://creative-tim.com');
+    final Uri url = Uri.parse('https://eduv.tecazuay.edu.ec/');
 
     if (!await launchUrl(url)) {
       throw 'No se pudo lanzar $url';
@@ -154,7 +154,7 @@ class NowDrawer extends StatelessWidget {
                       icon: FontAwesomeIcons.satellite,
                       onTap: _launchURL,
                       iconColor: NowUIColors.muted,
-                      title: "Sobre Nuestra App",
+                      title: "Información Sobre nuestra Institución",
                       isSelected:
                           currentPage == "Getting started" ? true : false),
                 ],
